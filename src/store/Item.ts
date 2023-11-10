@@ -1,15 +1,37 @@
 import { IItem, Item } from "@/types/Biz";
-import { Action } from "../types/store";
+import { ActionSet, ActionGet } from "@/types/store";
 
 export const ItemAsset = {
-  asset: [] as IItem[],
+  item: [
+    {
+      id: "r1",
+      name: "wood",
+      textIcon: "W",
+      quality: "normal",
+      description: "test item",
+      image: "",
+    },
+    {
+      id: "r2",
+      name: "Grass",
+      textIcon: "G",
+      quality: "dross",
+      description: "test item",
+      image: "",
+    },
+  ] as IItem[],
   inventory: [] as Item[],
 };
 
-export const ItemAssetAction: Action<typeof ItemAsset> = (set, _) => ({
-  addItemAsset: (item: IItem) =>
-    set((state) => {
-      state.asset.push(item);
-    }),
-  // getCount: () => get().count,
-});
+export const ItemAssetAction = (
+  set: ActionSet<typeof ItemAsset>,
+  get: ActionGet<typeof ItemAsset>
+) =>
+  ({
+    addItemAsset: (item: IItem) =>
+      set((state) => {
+        state.item.push(item);
+      }),
+    getItem: () => get().item,
+  } as const);
+

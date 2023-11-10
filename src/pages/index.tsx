@@ -13,9 +13,10 @@ import {
   PlayCircleOutlined,
   RadarChartOutlined,
 } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Breadcrumb, Flex, Layout, Menu, theme } from "antd";
 import TechEdit from "./Tech/TechEdit";
 import ItemEdit from "./Item/ItemEdit";
+import App from "@/App";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -64,6 +65,7 @@ const Index = () => {
         onCollapse={(value) => setCollapsed(value)}
       >
         <Menu
+          defaultOpenKeys={["Play", "Edit"]}
           defaultSelectedKeys={["1"]}
           mode="inline"
           items={menuItems}
@@ -91,15 +93,6 @@ const Index = () => {
           ></Breadcrumb>
         </Header>
         <Content style={{ margin: "16px" }}>
-          <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-              background: colorBgContainer,
-            }}
-          >
-            <TechEdit />
-          </div>
           <div
             style={{
               padding: 24,

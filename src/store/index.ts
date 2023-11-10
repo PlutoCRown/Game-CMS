@@ -10,7 +10,7 @@ type State = typeof state &
   typeof ItemAsset &
   ReturnType<typeof ItemAssetAction>;
 
-export const useGlobalStore = create<State, any>(
+export const useGlobalStore = create<State>()(
   persist(
     immer((set, get) => ({
       // 扩展请解在这里

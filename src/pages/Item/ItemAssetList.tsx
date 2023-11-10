@@ -1,89 +1,79 @@
-import { Space, Table, Tag } from "antd";
+import { useGlobalStore } from "@/store";
+import { IItem } from "@/types/Biz";
+import { ItemQualityMapColor } from "@/types/Item";
+import { Space, Table, Tag, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
 
-interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
-}
-
-const columns: ColumnsType<DataType> = [
+const columns: ColumnsType<IItem> = [
+  {
+    title: "Icon",
+    key: "textIcon",
+    render: (_, record) =>
+      record.image !== "" ? (
+        <img
+          src={record.image}
+          style={{
+            width: 48,
+            borderRadius: 12,
+            height: 48,
+          }}
+        />
+      ) : (
+        <div
+          style={{
+            boxSizing: "content-box",
+            border: "3px solid #0001",
+            width: 48,
+            fontSize: 32,
+            color: "#000c",
+            textAlign: "center",
+            borderRadius: 12,
+            height: 48,
+            backgroundColor: ItemQualityMapColor[record.quality],
+          }}
+        >
+          {record.textIcon}
+        </div>
+      ),
+  },
   {
     title: "Name",
     dataIndex: "name",
     key: "name",
-    render: (text) => <a>{text}</a>,
+    render: (text, { id }) => <Tooltip title={`ID: ${id}`}>{text}</Tooltip>,
   },
   {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
+    title: "Description",
+    dataIndex: "description",
+    width: 1000,
+    key: "description",
   },
   {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "loser") {
-            color = "volcano";
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
+    title: "Quality",
+    key: "quality",
+    dataIndex: "quality",
+    render: (_, { quality }) => (
+      <Tag color={ItemQualityMapColor[quality]}>{quality}</Tag>
     ),
   },
   {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
-
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
+    title: "Recipes Count",
+    key: "id",
+    dataIndex: "id",
+    render: (_, __) => "0",
   },
   {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
+    title: "Ingendents Count",
+    key: "id",
+    dataIndex: "id",
+    render: (_, __) => "0",
   },
 ];
 
 const ItemAssetList = () => {
-  return <Table columns={columns} dataSource={data} />;
+  const items = useGlobalStore((state) => state.item);
+  console.log(items);
+  return <Table columns={columns} dataSource={items} />;
 };
 
 export default ItemAssetList;

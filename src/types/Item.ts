@@ -1,10 +1,12 @@
-export type ItemQuality =
-  | "dross"
-  | "normal"
-  | "rare"
-  | "epic"
-  | "legendary"
-  | "mythic";
+export const ItemQualityArray = [
+  "dross",
+  "normal",
+  "rare",
+  "epic",
+  "legendary",
+  "mythic",
+] as const;
+export type ItemQuality = (typeof ItemQualityArray)[number];
 
 export const ItemQualityMapColor: Record<ItemQuality, string> = {
   dross: "#CCCCCC",
