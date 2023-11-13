@@ -1,12 +1,12 @@
 import { Button, Flex, Form, Input, Modal, Slider } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
-import ItemAssetList from "./ItemAssetList";
 import { ItemQualityArray } from "@/types/Item";
 import { useGlobalStore } from "@/store";
 import { SearchOutlined } from "@ant-design/icons";
+import RecipeAssetList from "./RecipeAssetList";
 
-const ItemEdit = () => {
+const RecipeEdit = () => {
   const [open, setOpen] = useState(false);
   const addItem = useGlobalStore((state) => state.itemAction.addItemAsset);
   const submitAddItem = () => {
@@ -34,7 +34,7 @@ const ItemEdit = () => {
     <>
       <Modal
         forceRender
-        title="Basic Modal"
+        title="Make Recipe"
         open={open}
         onOk={submitAddItem}
         onCancel={() => setOpen(false)}
@@ -95,7 +95,7 @@ const ItemEdit = () => {
           </Form>
         </Flex>
       </Modal>
-      <ItemAssetList />
+      <RecipeAssetList />
       <Button type="primary" onClick={() => setOpen(true)}>
         Add
       </Button>
@@ -103,4 +103,4 @@ const ItemEdit = () => {
   );
 };
 
-export default ItemEdit;
+export default RecipeEdit;

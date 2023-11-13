@@ -6,7 +6,7 @@ export const ItemAsset = {
     {
       id: "r1",
       name: "wood",
-      textIcon: "W",
+      textIcon: "🪵",
       quality: "normal",
       description: "test item",
       image: "",
@@ -14,7 +14,7 @@ export const ItemAsset = {
     {
       id: "r2",
       name: "Grass",
-      textIcon: "G",
+      textIcon: "草",
       quality: "dross",
       description: "test item",
       image: "",
@@ -26,12 +26,13 @@ export const ItemAsset = {
 export const ItemAssetAction = (
   set: ActionSet<typeof ItemAsset>,
   get: ActionGet<typeof ItemAsset>
-) =>
-  ({
+) => ({
+  itemAction: {
     addItemAsset: (item: IItem) =>
       set((state) => {
         state.item.push(item);
       }),
     getItem: () => get().item,
-  } as const);
+  },
+});
 

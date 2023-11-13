@@ -56,10 +56,11 @@ export type Recipe = IRecipe & {
   num: number;
 };
 
-// 抽象设备
+// 抽象设备 ｜ 继承一个可放置物 | Q:一个物品可以放出多种东西？A:是。
 export type IMachine = {
   id: MachineID;
   name: string;
+  item: IItem;
   image: string;
   textIcon: string;
 };

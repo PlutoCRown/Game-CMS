@@ -3,7 +3,7 @@ import { IItem } from "@/types/Biz";
 import { ItemQualityMapColor } from "@/types/Item";
 import { Space, Table, Tag, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import ItemIcon from "./ItemIcon";
+import ItemIcon from "../Item/ItemIcon";
 
 const columns: ColumnsType<IItem> = [
   {
@@ -45,9 +45,9 @@ const columns: ColumnsType<IItem> = [
   },
 ];
 
-const ItemAssetList = () => {
+const RecipeAssetList = () => {
   const items = useGlobalStore((state) => state.item);
   return <Table columns={columns} dataSource={items} />;
 };
 
-export default ItemAssetList;
+export default RecipeAssetList;
