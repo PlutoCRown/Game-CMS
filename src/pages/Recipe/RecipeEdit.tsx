@@ -1,17 +1,25 @@
 import { Button, Flex, Form, Input, Modal, theme } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
-import { ItemQualityArray } from "@/types/Item";
 import { useGlobalStore } from "@/store";
 import { SearchOutlined } from "@ant-design/icons";
 import RecipeAssetList from "./RecipeAssetList";
 import ItemIcon from "../Item/ItemIcon";
+import { IItem, Item } from "@/types/Biz";
+import ItemGridLayout from "../Item/ItemGridLayout";
 
 const RecipeEdit = () => {
-  const [open, setOpen] = useState(false);
-  const addRecipe = useGlobalStore((state) => state.itemAction.addItemAsset);
-  const items = useGlobalStore((state) => state.item);
+  const [form] = Form.useForm();
   const { token } = theme.useToken();
+
+  const addRecipe = useGlobalStore((state) => state.recipeAction.addAsset);
+  const items = useGlobalStore((state) => state.item);
+
+  const [open, setOpen] = useState(false);
+  const [pickingProduct, setPicking] = useState(false);
+  const [ingredients, setIngredients] = useState<Item[]>([]);
+  const [product, setProduct] = useState<Item[]>([]);
+
   const submitAddRecipe = () => {
     const { name, description, textIcon, quality } = form.getFieldsValue([
       "name",
@@ -24,15 +32,33 @@ const RecipeEdit = () => {
       name,
       description,
       textIcon,
-      quality: Object.assign({}, ItemQualityArray as any)[quality],
-      image: "",
+      ingredients: ingredients,
+      products: product,
+      manufacturer: quality,
     });
     form.resetFields();
     setOpen(false);
   };
 
-  const [form] = Form.useForm();
-
+  const Pick = (item: IItem) => {
+    console.log(666);
+    let container = pickingProduct ? setProduct : setIngredients;
+    container((state) => {
+      const exist = state.find((i) => i.id == item.id);
+      if (exist !== undefined) {
+        exist.num += 1;
+        return [...state];
+      } else {
+        return [
+          ...state,
+          {
+            ...item,
+            num: 1,
+          },
+        ];
+      }
+    });
+  };
   return (
     <>
       <Modal
@@ -56,11 +82,7 @@ const RecipeEdit = () => {
             }}
           >
             <Input placeholder="Search..." prefix={<SearchOutlined />}></Input>
-            <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
-              {items.map((i) => (
-                <ItemIcon item={i} />
-              ))}
-            </div>
+            <ItemGridLayout items={items} onItemClick={Pick} />
           </Flex>
           <Form
             labelCol={{ span: 6 }}
@@ -79,23 +101,41 @@ const RecipeEdit = () => {
             </Form.Item>
             <Form.Item label="Ingredients" name="ingredients">
               <div
+                onClick={() => setPicking(false)}
                 style={{
                   width: "100%",
-                  height: 64,
-                  backgroundColor: token.colorFillContent,
+                  backgroundColor: pickingProduct
+                    ? token.colorFillContent
+                    : token.colorBgSpotlight,
                   borderRadius: 8,
+                  padding: 8,
+                  minHeight: 54,
                 }}
-              ></div>
+              >
+                <ItemGridLayout
+                  items={ingredients}
+                  onItemClick={() => console.log("Try Remove")}
+                />
+              </div>
             </Form.Item>
             <Form.Item label="Product" name="product">
               <div
+                onClick={() => setPicking(true)}
                 style={{
                   width: "100%",
-                  height: 64,
-                  backgroundColor: token.colorFillContent,
+                  backgroundColor: !pickingProduct
+                    ? token.colorFillContent
+                    : token.colorBgSpotlight,
                   borderRadius: 8,
+                  padding: 8,
+                  minHeight: 54,
                 }}
-              ></div>
+              >
+                <ItemGridLayout
+                  items={product}
+                  onItemClick={() => console.log("Try Remove")}
+                />
+              </div>
             </Form.Item>
           </Form>
         </Flex>

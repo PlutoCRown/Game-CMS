@@ -12,10 +12,12 @@ const ItemGrid: React.FC<{ item: Item | IItem }> = ({ item }) => {
           <span
             style={{
               position: "absolute",
-              top: "8",
-              left: "8",
-              width: "100%",
-              fontSize: "12px",
+              bottom: "0.2em",
+              right: "0.5em",
+              fontSize: 12,
+              color: "#FFF",
+              fontWeight: 900,
+              WebkitTextStroke: "1px black",
             }}
           >
             {item.num}

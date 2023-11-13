@@ -1,15 +1,15 @@
-import { IMachine, IRecipe } from "@/types/Biz";
+import { IMachine } from "@/types/Biz";
 import { ActionSet, ActionGet } from "@/types/store";
 
-export const RecipeAsset = {
+export const MachineAsset = {
   machine: [] as IMachine[],
 };
 
-export const ItemAssetAction = (
-  set: ActionSet<typeof RecipeAsset>,
-  get: ActionGet<typeof RecipeAsset>
+export const MachineAction = (
+  set: ActionSet<typeof MachineAsset>,
+  get: ActionGet<typeof MachineAsset>
 ) => ({
-  itemAction: {
+  machineAction: {
     addItemAsset: (machine: IMachine) =>
       set((state) => {
         state.machine.push(machine);

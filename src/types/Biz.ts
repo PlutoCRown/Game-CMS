@@ -37,7 +37,7 @@ export type IItem = {
 // 实例物品 ｜ 含状态
 export type Item = IItem & {
   num: number;
-  attr: any;
+  attr?: any;
 };
 
 // 抽象配方
