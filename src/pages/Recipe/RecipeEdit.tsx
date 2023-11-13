@@ -1,22 +1,25 @@
-import { Button, Flex, Form, Input, Modal, Slider } from "antd";
+import { Button, Flex, Form, Input, Modal, theme } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
 import { ItemQualityArray } from "@/types/Item";
 import { useGlobalStore } from "@/store";
 import { SearchOutlined } from "@ant-design/icons";
 import RecipeAssetList from "./RecipeAssetList";
+import ItemIcon from "../Item/ItemIcon";
 
 const RecipeEdit = () => {
   const [open, setOpen] = useState(false);
-  const addItem = useGlobalStore((state) => state.itemAction.addItemAsset);
-  const submitAddItem = () => {
+  const addRecipe = useGlobalStore((state) => state.itemAction.addItemAsset);
+  const items = useGlobalStore((state) => state.item);
+  const { token } = theme.useToken();
+  const submitAddRecipe = () => {
     const { name, description, textIcon, quality } = form.getFieldsValue([
       "name",
       "description",
       "textIcon",
       "quality",
     ]);
-    addItem({
+    addRecipe({
       id: `Item_${Math.random().toString(36).substring(2)}`,
       name,
       description,
@@ -36,37 +39,27 @@ const RecipeEdit = () => {
         forceRender
         title="Make Recipe"
         open={open}
-        onOk={submitAddItem}
+        onOk={submitAddRecipe}
         onCancel={() => setOpen(false)}
         width={1000}
       >
         <Flex gap={8}>
-          <Flex vertical gap={8}>
-            <div
-              style={{
-                flexBasis: 0,
-                flexGrow: 1,
-                border: "3px dashed #0002",
-                borderRadius: 12,
-                padding: 12,
-              }}
-            >
-              Preview
-            </div>
-            <div
-              style={{
-                flexBasis: 0,
-                flexGrow: 1,
-                background: "#EEE",
-                borderRadius: 12,
-                padding: 12,
-              }}
-            >
-              <Input
-                placeholder="Search..."
-                prefix={<SearchOutlined />}
-              ></Input>
-              Icon Selector
+          <Flex
+            vertical
+            gap={8}
+            style={{
+              flexBasis: 0,
+              flexGrow: 1,
+              backgroundColor: token.colorFillContent,
+              borderRadius: 8,
+              padding: 12,
+            }}
+          >
+            <Input placeholder="Search..." prefix={<SearchOutlined />}></Input>
+            <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+              {items.map((i) => (
+                <ItemIcon item={i} />
+              ))}
             </div>
           </Flex>
           <Form
@@ -84,21 +77,39 @@ const RecipeEdit = () => {
             <Form.Item label="Description" name="description">
               <TextArea placeholder="input placeholder" />
             </Form.Item>
-            <Form.Item label="Quality" name="quality" initialValue={1}>
-              <Slider
-                min={0}
-                max={ItemQualityArray.length - 1}
-                dots
-                marks={Object.assign({}, ItemQualityArray as any)}
-              />
+            <Form.Item label="Ingredients" name="ingredients">
+              <div
+                style={{
+                  width: "100%",
+                  height: 64,
+                  backgroundColor: token.colorFillContent,
+                  borderRadius: 8,
+                }}
+              ></div>
+            </Form.Item>
+            <Form.Item label="Product" name="product">
+              <div
+                style={{
+                  width: "100%",
+                  height: 64,
+                  backgroundColor: token.colorFillContent,
+                  borderRadius: 8,
+                }}
+              ></div>
             </Form.Item>
           </Form>
         </Flex>
       </Modal>
-      <RecipeAssetList />
-      <Button type="primary" onClick={() => setOpen(true)}>
+      <Button
+        type="primary"
+        onClick={() => setOpen(true)}
+        block
+        size="large"
+        style={{ marginBottom: 8 }}
+      >
         Add
       </Button>
+      <RecipeAssetList />
     </>
   );
 };

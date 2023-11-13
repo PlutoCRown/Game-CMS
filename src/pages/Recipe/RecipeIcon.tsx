@@ -1,13 +1,8 @@
-import { IItem } from "@/types/Biz";
-import { ItemQuality, ItemQualityMapColor } from "@/types/Item";
+import { IRecipe } from "@/types/Biz";
+import { ItemQualityMapColor } from "@/types/Item";
 import React from "react";
-type Iconable = {
-  image: string;
-  textIcon: string;
-  num?: number;
-  quality?: ItemQuality;
-};
-const ItemIcon: React.FC<{ item: Iconable }> = ({ item }) => {
+
+const RecipeIcon: React.FC<{ item: IRecipe }> = ({ item }) => {
   return item && item.image !== "" ? (
     <img
       src={item.image}
@@ -22,15 +17,16 @@ const ItemIcon: React.FC<{ item: Iconable }> = ({ item }) => {
       style={{
         boxSizing: "content-box",
         border: "3px solid #0001",
-        userSelect: "none",
         width: 48,
         fontSize: 32,
         color: "#FFFE",
         textAlign: "center",
+        userSelect: "none",
         borderRadius: 12,
         height: 48,
         overflow: "hidden",
-        backgroundColor: ItemQualityMapColor[item.quality || "normal"],
+        backgroundColor:
+          ItemQualityMapColor[item.products[0]?.quality || "normal"],
       }}
     >
       {item.textIcon}
@@ -38,4 +34,4 @@ const ItemIcon: React.FC<{ item: Iconable }> = ({ item }) => {
   );
 };
 
-export default ItemIcon;
+export default RecipeIcon;

@@ -45,9 +45,10 @@ export type IRecipe = {
   id: RecipeID;
   name: string;
   description: string;
-  image: string;
-  textIcon: string;
-  ingredients: IItem[];
+  image?: string; // 可以都没有，没有就是产物的图标
+  textIcon?: string;
+  ingredients: Item[];
+  products: Item[];
   manufacturer: Machine;
 };
 

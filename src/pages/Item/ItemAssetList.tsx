@@ -28,18 +28,23 @@ const columns: ColumnsType<IItem> = [
     key: "quality",
     dataIndex: "quality",
     render: (_, { quality }) => (
-      <Tag color={ItemQualityMapColor[quality]}>{quality}</Tag>
+      <Tag
+        color={ItemQualityMapColor[quality]}
+        style={quality == "normal" ? { color: "#666" } : {}}
+      >
+        {quality.toLocaleUpperCase()}
+      </Tag>
     ),
   },
   {
     title: "Recipes Count",
-    key: "id",
+    key: "1",
     dataIndex: "id",
     render: (_, __) => "0",
   },
   {
     title: "Ingendents Count",
-    key: "id",
+    key: "2",
     dataIndex: "id",
     render: (_, __) => "0",
   },
@@ -47,7 +52,12 @@ const columns: ColumnsType<IItem> = [
 
 const ItemAssetList = () => {
   const items = useGlobalStore((state) => state.item);
-  return <Table columns={columns} dataSource={items} />;
+  return (
+    <Table
+      columns={columns}
+      dataSource={items.map((i) => ({ ...i, key: i.id }))}
+    />
+  );
 };
 
 export default ItemAssetList;

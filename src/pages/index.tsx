@@ -13,10 +13,12 @@ import {
   PlayCircleOutlined,
   RadarChartOutlined,
 } from "@ant-design/icons";
-import { Breadcrumb, Flex, Layout, Menu, theme } from "antd";
-import TechEdit from "./Tech/TechEdit";
+import { Breadcrumb, Layout, Menu, theme } from "antd";
 import ItemEdit from "./Item/ItemEdit";
-import App from "@/App";
+import Nothing from "./Nothing";
+import TechEdit from "./Tech/TechEdit";
+import RecipeEdit from "./Recipe/RecipeEdit";
+import MachineEdit from "./Placeable/MachineEdit";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -51,7 +53,7 @@ const menuItems = [
 
 const Index = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [route, setRoute] = useState<string[]>([]);
+  const [route, setRoute] = useState<string[]>(["7", "Edit"]);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -75,21 +77,11 @@ const Index = () => {
       <Layout>
         <Header style={{ padding: 22, background: colorBgContainer }}>
           <Breadcrumb
-            items={[
-              {
-                title: route[1]
-                  ? menuItems.find((i) => i?.key == route[1])?.label
-                  : "",
-              },
-              {
-                title:
-                  route.length >= 2
-                    ? menuItems
-                        .find((i) => i?.key == route[1])
-                        ?.children?.find((i) => i?.key == route[0])?.label
-                    : "",
-              },
-            ]}
+            style={{ fontWeight: "bold" }}
+            items={((i) => [
+              i?.label,
+              i?.children?.find((i) => i?.key == route[0]).label,
+            ])(menuItems.find((i) => i?.key == route[1]))}
           ></Breadcrumb>
         </Header>
         <Content style={{ margin: "16px" }}>
@@ -100,7 +92,20 @@ const Index = () => {
               background: colorBgContainer,
             }}
           >
-            <ItemEdit />
+            {
+              {
+                "1": <Nothing />,
+                "2": <Nothing />,
+                "3": <Nothing />,
+                "4": <Nothing />,
+                "5": <Nothing />,
+                "6": <Nothing />,
+                "7": <ItemEdit />,
+                "8": <TechEdit />,
+                "9": <RecipeEdit />,
+                "10": <MachineEdit />,
+              }[route[0]]
+            }
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>Meow!</Footer>

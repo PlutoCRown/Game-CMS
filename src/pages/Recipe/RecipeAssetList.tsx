@@ -1,15 +1,14 @@
-import { useGlobalStore } from "@/store";
-import { IItem } from "@/types/Biz";
-import { ItemQualityMapColor } from "@/types/Item";
-import { Space, Table, Tag, Tooltip } from "antd";
+import { IRecipe } from "@/types/Biz";
+import { Table, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import ItemIcon from "../Item/ItemIcon";
+import RecipeIcon from "./RecipeIcon";
 
-const columns: ColumnsType<IItem> = [
+const columns: ColumnsType<IRecipe> = [
   {
     title: "Icon",
     key: "textIcon",
-    render: (_, record) => <ItemIcon item={record} />,
+    render: (_, record) => <RecipeIcon item={record} />,
   },
   {
     title: "Name",
@@ -20,34 +19,27 @@ const columns: ColumnsType<IItem> = [
   {
     title: "Description",
     dataIndex: "description",
-    width: 1000,
     key: "description",
   },
   {
-    title: "Quality",
-    key: "quality",
-    dataIndex: "quality",
-    render: (_, { quality }) => (
-      <Tag color={ItemQualityMapColor[quality]}>{quality}</Tag>
-    ),
+    title: "Ingredient",
+    key: "ingredients",
+    dataIndex: "ingredients",
+    render: (_, { ingredients }) =>
+      ingredients.map((ingredient) => <ItemIcon item={ingredient} />),
   },
   {
-    title: "Recipes Count",
-    key: "id",
-    dataIndex: "id",
-    render: (_, __) => "0",
-  },
-  {
-    title: "Ingendents Count",
-    key: "id",
-    dataIndex: "id",
-    render: (_, __) => "0",
+    title: "Products",
+    key: "products",
+    dataIndex: "products",
+    render: (_, { products }) =>
+      products.map((product) => <ItemIcon item={product} />),
   },
 ];
 
 const RecipeAssetList = () => {
-  const items = useGlobalStore((state) => state.item);
-  return <Table columns={columns} dataSource={items} />;
+  // const items = useGlobalStore((state) => state.item);
+  return <Table columns={columns} dataSource={[]} />;
 };
 
 export default RecipeAssetList;

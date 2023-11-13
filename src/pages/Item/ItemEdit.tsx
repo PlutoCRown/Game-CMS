@@ -95,10 +95,16 @@ const ItemEdit = () => {
           </Form>
         </Flex>
       </Modal>
-      <ItemAssetList />
-      <Button type="primary" onClick={() => setOpen(true)}>
+      <Button
+        type="primary"
+        onClick={() => setOpen(true)}
+        block
+        size="large"
+        style={{ marginBottom: 8 }}
+      >
         Add
       </Button>
+      <ItemAssetList />
     </>
   );
 };
