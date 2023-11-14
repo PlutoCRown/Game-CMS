@@ -5,6 +5,7 @@ import ItemAssetList from "./ItemAssetList";
 import { ItemQualityArray } from "@/types/Item";
 import { useGlobalStore } from "@/store";
 import { SearchOutlined } from "@ant-design/icons";
+import ItemPreview from "./ItemPreview";
 
 const ItemEdit = () => {
   const [open, setOpen] = useState(false);
@@ -42,17 +43,7 @@ const ItemEdit = () => {
       >
         <Flex gap={8}>
           <Flex vertical gap={8}>
-            <div
-              style={{
-                flexBasis: 0,
-                flexGrow: 1,
-                border: "3px dashed #0002",
-                borderRadius: 12,
-                padding: 12,
-              }}
-            >
-              Preview
-            </div>
+            <ItemPreview />
             <div
               style={{
                 flexBasis: 0,

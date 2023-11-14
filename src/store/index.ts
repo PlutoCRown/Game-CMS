@@ -4,6 +4,7 @@ import { immer } from "zustand/middleware/immer";
 import { state, action } from "./count";
 import { ItemAsset, ItemAssetAction } from "./Item";
 import { RecipeAction, RecipeAsset } from "./Recipe";
+import { MachineAction, MachineAsset } from "./Machine";
 
 // 扩展请 & 类型
 type State = typeof state &
@@ -11,7 +12,9 @@ type State = typeof state &
   typeof ItemAsset &
   ReturnType<typeof ItemAssetAction> &
   typeof RecipeAsset &
-  ReturnType<typeof RecipeAction>;
+  ReturnType<typeof RecipeAction> &
+  typeof MachineAsset &
+  ReturnType<typeof MachineAction>;
 
 export const useGlobalStore = create<State>()(
   // persist(
@@ -23,6 +26,8 @@ export const useGlobalStore = create<State>()(
     ...ItemAssetAction(set, get),
     ...RecipeAsset,
     ...RecipeAction(set, get),
+    ...MachineAsset,
+    ...MachineAction(set, get),
   }))
   //   {
   //     name: "zustand-global-storage",

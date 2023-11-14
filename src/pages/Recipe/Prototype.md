@@ -7,4 +7,4 @@ ings TransSelection
 
 product TransSelection
 
-UsingMachine TransSelectionq
+UsingMachine TransSelection

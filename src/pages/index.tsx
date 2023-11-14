@@ -13,12 +13,12 @@ import {
   PlayCircleOutlined,
   RadarChartOutlined,
 } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Breadcrumb, Flex, Layout, Menu, Space, theme } from "antd";
 import ItemEdit from "./Item/ItemEdit";
 import Nothing from "./Nothing";
 import TechEdit from "./Tech/TechEdit";
 import RecipeEdit from "./Recipe/RecipeEdit";
-import MachineEdit from "./Placeable/MachineEdit";
+import MachinePage from "./Machine/MachinePage";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -103,7 +103,7 @@ const Index = () => {
                 "7": <ItemEdit />,
                 "8": <TechEdit />,
                 "9": <RecipeEdit />,
-                "10": <MachineEdit />,
+                "10": <MachinePage />,
               }[route[0]]
             }
           </div>

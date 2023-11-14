@@ -7,7 +7,7 @@ const ItemGridLayout: React.FC<{
   onItemClick: (item: IItem) => void;
 }> = ({ items, onItemClick }) => {
   return (
-    <div style={{ display: "flex", gap: 8 }}>
+    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
       {items.map((i) => (
         <span
           onClick={() => onItemClick(i)}

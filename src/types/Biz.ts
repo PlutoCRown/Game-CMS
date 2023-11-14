@@ -5,24 +5,6 @@ export type TechnologyID = string;
 export type RecipeID = string;
 export type MachineID = string;
 
-// 抽象技术 ｜ 存储体
-export type ITechnology = {
-  id: TechnologyID;
-  name: string;
-  description: string;
-  image: string;
-  textIcon: string;
-  prerequisites: TechnologyID[];
-  necessary: ItemID[];
-};
-
-// 实例技术 ｜ 状态
-export type Technology = Omit<ITechnology, "prerequisites" | "necessary"> & {
-  status: "Researched" | "unlocked" | "locked";
-  prerequisites: Technology[];
-  necessary: Item[];
-};
-
 // 抽象物品 ｜ 存储体
 export type IItem = {
   id: ItemID;
@@ -49,7 +31,7 @@ export type IRecipe = {
   textIcon?: string;
   ingredients: Item[];
   products: Item[];
-  manufacturer: Machine;
+  manufacturer: IMachine | "Hand";
 };
 
 // 实例配方 ｜ 队列状
@@ -64,9 +46,30 @@ export type IMachine = {
   item: IItem;
   image: string;
   textIcon: string;
+  fuelType: "N" | "E" | "M"; // 无/电/法
+  fuelValue: number;
+  slotType: "fixed" | "free";
 };
 
 // 实例设备 ｜ 当科技解锁配方时推入配方
 export type Machine = IMachine & {
   recipes: IRecipe[];
+};
+
+// 抽象技术 ｜ 存储体
+export type ITechnology = {
+  id: TechnologyID;
+  name: string;
+  description: string;
+  image: string;
+  textIcon: string;
+  prerequisites: TechnologyID[];
+  necessary: ItemID[];
+};
+
+// 实例技术 ｜ 状态
+export type Technology = Omit<ITechnology, "prerequisites" | "necessary"> & {
+  status: "Researched" | "unlocked" | "locked";
+  prerequisites: Technology[];
+  necessary: Item[];
 };

@@ -1,8 +1,12 @@
-import { IMachine } from "@/types/Biz";
+import { IMachine, Machine } from "@/types/Biz";
 import { ActionSet, ActionGet } from "@/types/store";
 
 export const MachineAsset = {
-  machine: [] as IMachine[],
+  machine: {
+    placeable: [] as IMachine[],
+    structure: [] as Machine[],
+    NONE: "Hand",
+  },
 };
 
 export const MachineAction = (
@@ -10,9 +14,9 @@ export const MachineAction = (
   get: ActionGet<typeof MachineAsset>
 ) => ({
   machineAction: {
-    addItemAsset: (machine: IMachine) =>
+    addPlaceable: (machine: IMachine) =>
       set((state) => {
-        state.machine.push(machine);
+        state.machine.placeable.push(machine);
       }),
     getItem: () => get().machine,
   },
