@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useGlobalStore } from "@/store";
 import { SearchOutlined } from "@ant-design/icons";
 import RecipeAssetList from "./RecipeAssetList";
-import ItemIcon from "../Item/ItemIcon";
 import { IItem, IMachine, Item, ItemID } from "@/types/Biz";
 import ItemGridLayout from "../Item/ItemGridLayout";
 import ItemPreview from "../Item/ItemPreview";
@@ -44,16 +43,33 @@ const RecipeEdit = () => {
         products: product,
         manufacturer: manu,
       });
-      form.resetFields();
-      setManu(null)
-      setProduct([])
-      setIngredients([])
+      Clear();
       setOpen(false);
     }
   };
+  const Clear = () => {
+    form.resetFields();
+    setManu(null);
+    setProduct([]);
+    setIngredients([]);
+  };
+  const removePick = (item: IItem) => {
+    let container = pickingProduct ? setProduct : setIngredients;
+    container((state) => {
+      const exist = state.findIndex((i) => i.id == item.id);
+      state[exist].num--;
+      if (state[exist].num <= 0) {
+        console.log(
+          "remove!",
+          state.filter((i) => i.id !== state[exist].id)
+        );
+        return state.filter((i) => i.id !== state[exist].id);
+      }
+      return [...state];
+    });
+  };
 
   const Pick = (item: IItem) => {
-    console.log(666);
     let container = pickingProduct ? setProduct : setIngredients;
     container((state) => {
       const exist = state.find((i) => i.id == item.id);
@@ -74,6 +90,14 @@ const RecipeEdit = () => {
   const PickManu = (item: IItem) => {
     setManu(MapItem2Machine.get(item.id) || null);
   };
+
+  const selfAssetStyle = {
+    flexBasis: 0,
+    flexGrow: 1,
+    backgroundColor: token.colorFillContent,
+    borderRadius: 8,
+    padding: 12,
+  };
   return (
     <>
       <Modal
@@ -86,34 +110,14 @@ const RecipeEdit = () => {
       >
         <Flex gap={8}>
           <Flex vertical gap={9}>
-            <Flex
-              vertical
-              gap={8}
-              style={{
-                flexBasis: 0,
-                flexGrow: 1,
-                backgroundColor: token.colorFillContent,
-                borderRadius: 8,
-                padding: 12,
-              }}
-            >
+            <Flex vertical gap={8} style={selfAssetStyle}>
               <Input
                 placeholder="Search..."
                 prefix={<SearchOutlined />}
               ></Input>
               <ItemGridLayout items={items} onItemClick={Pick} />
             </Flex>
-            <Flex
-              vertical
-              gap={8}
-              style={{
-                flexBasis: 0,
-                flexGrow: 1,
-                backgroundColor: token.colorFillContent,
-                borderRadius: 8,
-                padding: 12,
-              }}
-            >
+            <Flex vertical gap={8} style={selfAssetStyle}>
               <Input
                 placeholder="Search..."
                 prefix={<SearchOutlined />}
@@ -153,10 +157,7 @@ const RecipeEdit = () => {
                   minHeight: 54,
                 }}
               >
-                <ItemGridLayout
-                  items={ingredients}
-                  onItemClick={() => console.log("Try Remove")}
-                />
+                <ItemGridLayout items={ingredients} onItemClick={removePick} />
               </div>
             </Form.Item>
             <Form.Item label="Product" name="product">
@@ -172,10 +173,7 @@ const RecipeEdit = () => {
                   minHeight: 54,
                 }}
               >
-                <ItemGridLayout
-                  items={product}
-                  onItemClick={() => console.log("Try Remove")}
-                />
+                <ItemGridLayout items={product} onItemClick={removePick} />
               </div>
             </Form.Item>
             <ItemPreview item={manu?.item} />

@@ -4,6 +4,7 @@ import type { ColumnsType } from "antd/es/table";
 import ItemIcon from "../Item/ItemIcon";
 import RecipeIcon from "./RecipeIcon";
 import { useGlobalStore } from "@/store";
+import ItemGrid from "../Item/ItemGrid";
 
 const columns: ColumnsType<IRecipe> = [
   {
@@ -27,14 +28,14 @@ const columns: ColumnsType<IRecipe> = [
     key: "ingredients",
     dataIndex: "ingredients",
     render: (_, { ingredients }) =>
-      ingredients.map((ingredient) => <ItemIcon item={ingredient} />),
+      ingredients.map((ingredient) => <ItemGrid item={ingredient} />),
   },
   {
     title: "Products",
     key: "products",
     dataIndex: "products",
     render: (_, { products }) =>
-      products.map((product) => <ItemIcon item={product} />),
+      products.map((product) => <ItemGrid item={product} />),
   },
 ];
 

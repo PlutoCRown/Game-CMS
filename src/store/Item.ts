@@ -29,7 +29,7 @@ export const ItemAsset = {
       image: "",
     },
     {
-      id: "r2",
+      id: "r10",
       name: "Iron",
       textIcon: "铁",
       quality: "normal",
@@ -54,7 +54,7 @@ export const ItemAsset = {
     },
     {
       id: "r6",
-      name: "Brick",
+      name: "Stone",
       textIcon: "🪨",
       quality: "normal",
       description: "Make by Stone in hand",
