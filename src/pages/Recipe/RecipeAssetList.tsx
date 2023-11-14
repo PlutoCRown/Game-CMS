@@ -3,6 +3,7 @@ import { Table, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import ItemIcon from "../Item/ItemIcon";
 import RecipeIcon from "./RecipeIcon";
+import { useGlobalStore } from "@/store";
 
 const columns: ColumnsType<IRecipe> = [
   {
@@ -38,8 +39,8 @@ const columns: ColumnsType<IRecipe> = [
 ];
 
 const RecipeAssetList = () => {
-  // const items = useGlobalStore((state) => state.item);
-  return <Table columns={columns} dataSource={[]} />;
+  const recipe = useGlobalStore((state) => state.recipe);
+  return <Table columns={columns} dataSource={recipe} />;
 };
 
 export default RecipeAssetList;

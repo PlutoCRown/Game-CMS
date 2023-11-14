@@ -5,8 +5,9 @@ import { useGlobalStore } from "@/store";
 import { SearchOutlined } from "@ant-design/icons";
 import RecipeAssetList from "./RecipeAssetList";
 import ItemIcon from "../Item/ItemIcon";
-import { IItem, Item } from "@/types/Biz";
+import { IItem, IMachine, Item, ItemID } from "@/types/Biz";
 import ItemGridLayout from "../Item/ItemGridLayout";
+import ItemPreview from "../Item/ItemPreview";
 
 const RecipeEdit = () => {
   const [form] = Form.useForm();
@@ -14,30 +15,41 @@ const RecipeEdit = () => {
 
   const addRecipe = useGlobalStore((state) => state.recipeAction.addAsset);
   const items = useGlobalStore((state) => state.item);
+  const placeable = useGlobalStore((state) => state.machine.placeable);
+  const MapItem2Machine = placeable.reduce((pre, cur) => {
+    pre.set(cur.item.id, cur);
+    return pre;
+  }, new Map<ItemID, IMachine>());
 
   const [open, setOpen] = useState(false);
   const [pickingProduct, setPicking] = useState(false);
   const [ingredients, setIngredients] = useState<Item[]>([]);
   const [product, setProduct] = useState<Item[]>([]);
+  const [manu, setManu] = useState<IMachine | null>(null);
 
   const submitAddRecipe = () => {
-    const { name, description, textIcon, quality } = form.getFieldsValue([
-      "name",
-      "description",
-      "textIcon",
-      "quality",
-    ]);
-    addRecipe({
-      id: `Item_${Math.random().toString(36).substring(2)}`,
-      name,
-      description,
-      textIcon,
-      ingredients: ingredients,
-      products: product,
-      manufacturer: quality,
-    });
-    form.resetFields();
-    setOpen(false);
+    if (manu) {
+      const { name, description, image } = form.getFieldsValue([
+        "name",
+        "description",
+        "image",
+      ]);
+      addRecipe({
+        id: `Item_${Math.random().toString(36).substring(2)}`,
+        name,
+        description,
+        image: image || product[0].image,
+        textIcon: product[0].textIcon,
+        ingredients: ingredients,
+        products: product,
+        manufacturer: manu,
+      });
+      form.resetFields();
+      setManu(null)
+      setProduct([])
+      setIngredients([])
+      setOpen(false);
+    }
   };
 
   const Pick = (item: IItem) => {
@@ -59,6 +71,9 @@ const RecipeEdit = () => {
       }
     });
   };
+  const PickManu = (item: IItem) => {
+    setManu(MapItem2Machine.get(item.id) || null);
+  };
   return (
     <>
       <Modal
@@ -70,20 +85,46 @@ const RecipeEdit = () => {
         width={1000}
       >
         <Flex gap={8}>
-          <Flex
-            vertical
-            gap={8}
-            style={{
-              flexBasis: 0,
-              flexGrow: 1,
-              backgroundColor: token.colorFillContent,
-              borderRadius: 8,
-              padding: 12,
-            }}
-          >
-            <Input placeholder="Search..." prefix={<SearchOutlined />}></Input>
-            <ItemGridLayout items={items} onItemClick={Pick} />
+          <Flex vertical gap={9}>
+            <Flex
+              vertical
+              gap={8}
+              style={{
+                flexBasis: 0,
+                flexGrow: 1,
+                backgroundColor: token.colorFillContent,
+                borderRadius: 8,
+                padding: 12,
+              }}
+            >
+              <Input
+                placeholder="Search..."
+                prefix={<SearchOutlined />}
+              ></Input>
+              <ItemGridLayout items={items} onItemClick={Pick} />
+            </Flex>
+            <Flex
+              vertical
+              gap={8}
+              style={{
+                flexBasis: 0,
+                flexGrow: 1,
+                backgroundColor: token.colorFillContent,
+                borderRadius: 8,
+                padding: 12,
+              }}
+            >
+              <Input
+                placeholder="Search..."
+                prefix={<SearchOutlined />}
+              ></Input>
+              <ItemGridLayout
+                items={placeable.map((i) => i.item)}
+                onItemClick={PickManu}
+              />
+            </Flex>
           </Flex>
+
           <Form
             labelCol={{ span: 6 }}
             wrapperCol={{ span: 16 }}
@@ -93,8 +134,8 @@ const RecipeEdit = () => {
             <Form.Item label="Name" name="name">
               <Input placeholder="input placeholder" />
             </Form.Item>
-            <Form.Item label="TextIcon" name="textIcon">
-              <Input placeholder="input placeholder" max={1} />
+            <Form.Item label="Image" name="image">
+              <Input placeholder="input placeholder" disabled />
             </Form.Item>
             <Form.Item label="Description" name="description">
               <TextArea placeholder="input placeholder" />
@@ -137,6 +178,7 @@ const RecipeEdit = () => {
                 />
               </div>
             </Form.Item>
+            <ItemPreview item={manu?.item} />
           </Form>
         </Flex>
       </Modal>
