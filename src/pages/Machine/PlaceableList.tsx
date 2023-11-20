@@ -1,11 +1,10 @@
 import { useGlobalStore } from "@/store";
-import { IItem, IMachine } from "@/types/Biz";
-import { ItemQualityMapColor } from "@/types/Item";
 import { Space, Table, Tag, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import ItemIcon from "../Item/ItemIcon";
+import { RMachine } from "@/types/Machine";
 
-const columns: ColumnsType<IMachine> = [
+const columns: ColumnsType<RMachine> = [
   {
     title: "Icon",
     key: "textIcon",
@@ -27,12 +26,15 @@ const columns: ColumnsType<IMachine> = [
 
 const PlaceableList: React.FC = () => {
   const placeable = useGlobalStore((state) => state.machine.placeable);
-  return (
-    <Table
-      columns={columns}
-      dataSource={placeable.map((i) => ({ ...i, key: i.id }))}
-    />
-  );
+  const item = useGlobalStore((state) => state.item);
+
+  const data: RMachine[] = placeable.map((r) => ({
+    ...r,
+    key: r.id,
+    item: item.find((m) => m.id == r.item)!,
+  }));
+
+  return <Table columns={columns} dataSource={data} />;
 };
 
 export default PlaceableList;

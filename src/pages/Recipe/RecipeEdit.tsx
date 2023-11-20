@@ -8,6 +8,7 @@ import ItemGridLayout from "../Item/ItemGridLayout";
 import ItemPreview from "../Item/ItemPreview";
 import { ItemID, IItem, Item } from "@/types/Item";
 import { IMachine } from "@/types/Machine";
+import { useRMachine, useRRecipe } from "@/hook/useR";
 
 const RecipeEdit = () => {
   const [form] = Form.useForm();
@@ -17,9 +18,12 @@ const RecipeEdit = () => {
   const items = useGlobalStore((state) => state.item);
   const placeable = useGlobalStore((state) => state.machine.placeable);
   const MapItem2Machine = placeable.reduce((pre, cur) => {
-    pre.set(cur.item.id, cur);
+    pre.set(cur.item, cur);
     return pre;
   }, new Map<ItemID, IMachine>());
+
+  const rRecipe = useRRecipe();
+  const rMachine = useRMachine();
 
   const [open, setOpen] = useState(false);
   const [pickingProduct, setPicking] = useState(false);
@@ -126,7 +130,7 @@ const RecipeEdit = () => {
                 prefix={<SearchOutlined />}
               ></Input>
               <ItemGridLayout
-                items={placeable.map((i) => i.item)}
+                items={rMachine.map((i) => i.item)}
                 onItemClick={PickManu}
               />
             </Flex>
@@ -192,7 +196,7 @@ const RecipeEdit = () => {
       >
         Add
       </Button>
-      <RecipeAssetList />
+      <RecipeAssetList data={rRecipe} />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { IMachine, Machine } from "@/types/Biz";
+import { IMachine, Machine } from "@/types/Machine";
 import { ActionSet, ActionGet } from "@/types/store";
 
 export const MachineAsset = {

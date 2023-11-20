@@ -1,4 +1,4 @@
-import { IItem } from "./Item";
+import { IItem, ItemID } from "./Item";
 import { IRecipe } from "./Recipe";
 
 export type MachineID = string;
@@ -7,7 +7,7 @@ export type MachineID = string;
 export type IMachine = {
   id: MachineID;
   name: string;
-  item: IItem;
+  item: ItemID;
   image: string;
   textIcon: string;
   fuelType: "N" | "E" | "M"; // 无/电/法
@@ -18,4 +18,8 @@ export type IMachine = {
 // 实例设备 ｜ 当科技解锁配方时推入配方
 export type Machine = IMachine & {
   recipes: IRecipe[];
+};
+
+export type RMachine = Omit<IMachine, "item"> & {
+  item: IItem;
 };

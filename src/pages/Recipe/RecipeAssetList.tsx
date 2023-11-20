@@ -40,19 +40,8 @@ const columns: ColumnsType<RRecipe> = [
   },
 ];
 
-const RecipeAssetList = () => {
-  const recipe = useGlobalStore((state) => state.recipe);
-  const item = useGlobalStore((state) => state.item);
-  const machine = useGlobalStore((state) => state.machine.placeable);
-
-  const datac: RRecipe[] = recipe.map((r) => ({
-    ...r,
-    ingredients: r.ingredients.map((i) => item.find((ii) => ii.id == i)),
-    products: r.products.map((i) => item.find((ii) => ii.id == i)),
-    manufacturer: machine.find((m) => m.id == r.manufacturer),
-  }));
-
-  return <Table columns={columns} dataSource={datac} />;
+const RecipeAssetList: React.FC<{ data: RRecipe[] }> = ({ data }) => {
+  return <Table columns={columns} dataSource={data} />;
 };
 
 export default RecipeAssetList;

@@ -6,10 +6,10 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import { useGlobalStore } from "@/store";
-import { IItem } from "@/types/Biz";
 import ItemGridLayout from "../Item/ItemGridLayout";
 import ItemPreview from "../Item/ItemPreview";
 import PlaceableList from "./PlaceableList";
+import { IItem } from "@/types/Item";
 
 const PlaceableEdit = () => {
   const [form] = Form.useForm();
@@ -35,7 +35,7 @@ const PlaceableEdit = () => {
         id: `Item_${Math.random().toString(36).substring(2)}`,
         name: placeItem.name,
         image: EntitySprite || placeItem.image,
-        item: placeItem,
+        item: placeItem.id,
         textIcon: placeItem.textIcon,
         fuelType: fuelType,
         fuelValue: fuel,
