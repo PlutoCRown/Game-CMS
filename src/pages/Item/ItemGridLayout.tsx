@@ -8,6 +8,9 @@ const ItemGridLayout: React.FC<{
   onItemClick: (item: IItem) => void;
   onlyIcon?: boolean;
 }> = ({ items, onItemClick, onlyIcon }) => {
+  if (items[0] && typeof items[0] == "string") {
+    return <>Error</>;
+  }
   return (
     <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
       {items.map((i, index) => (

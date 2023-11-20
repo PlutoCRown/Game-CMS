@@ -8,7 +8,7 @@ import ItemGridLayout from "../Item/ItemGridLayout";
 import ItemPreview from "../Item/ItemPreview";
 import { ItemID, IItem, Item } from "@/types/Item";
 import { IMachine } from "@/types/Machine";
-import { useRMachine, useRRecipe } from "@/hook/useR";
+import { useRMachine } from "@/hook/useR";
 
 const RecipeEdit = () => {
   const [form] = Form.useForm();
@@ -22,7 +22,6 @@ const RecipeEdit = () => {
     return pre;
   }, new Map<ItemID, IMachine>());
 
-  const rRecipe = useRRecipe();
   const rMachine = useRMachine();
 
   const [open, setOpen] = useState(false);
@@ -95,6 +94,7 @@ const RecipeEdit = () => {
     });
   };
   const PickManu = (item: IItem) => {
+    console.log(item, MapItem2Machine);
     setManu(MapItem2Machine.get(item.id) || null);
   };
 
@@ -196,7 +196,7 @@ const RecipeEdit = () => {
       >
         Add
       </Button>
-      <RecipeAssetList data={rRecipe} />
+      <RecipeAssetList />
     </>
   );
 };
