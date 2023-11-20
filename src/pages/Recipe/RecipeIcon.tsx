@@ -1,8 +1,8 @@
-import { IRecipe } from "@/types/Biz";
 import { ItemQualityMapColor } from "@/types/Item";
+import { IRecipe, RRecipe } from "@/types/Recipe";
 import React from "react";
 
-const RecipeIcon: React.FC<{ item: IRecipe }> = ({ item }) => {
+const RecipeIcon: React.FC<{ item: RRecipe }> = ({ item }) => {
   return item && item.image !== "" ? (
     <img
       src={item.image}
@@ -26,7 +26,11 @@ const RecipeIcon: React.FC<{ item: IRecipe }> = ({ item }) => {
         height: 48,
         overflow: "hidden",
         backgroundColor:
-          ItemQualityMapColor[item.products[0]?.quality || "normal"],
+          ItemQualityMapColor[
+            typeof item.products[0] === "object"
+              ? item.products[0]?.quality
+              : "normal"
+          ],
       }}
     >
       {item.textIcon}

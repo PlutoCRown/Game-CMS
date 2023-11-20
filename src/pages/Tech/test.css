@@ -1,24 +1,21 @@
-#tech img {
-  width: 140px;
-  height: 200px;
-  background: #45a5b9;
+.tech-card {
+  position: relative;
+  box-sizing: content-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #45a5b9;
   border: 8px solid;
   border-right-color: #0003;
   border-bottom-color: #0003;
   border-left-color: #FFF3;
   border-top-color: #FFF3;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 }
 
-#tech {
-  position: relative;
-  width: 140px;
-  height: 200px;
-  box-sizing: content-box;
-}
-
-#tech::after {
+.tech-card::after {
   content: "NAME";
+  text-overflow: ellipsis;
   position: absolute;
   width: 100%;
   background-color: #0005;
@@ -26,6 +23,6 @@
   left: 0;
   font-size: 16px;
   color: #FFF;
-  padding: 5px;
+  padding: 1px 5px;
   box-sizing: border-box;
 }

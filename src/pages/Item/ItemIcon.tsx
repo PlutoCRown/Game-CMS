@@ -1,7 +1,7 @@
 import { IItem } from "@/types/Biz";
 import { ItemQuality, ItemQualityMapColor } from "@/types/Item";
 import React from "react";
-type Iconable = {
+export type Iconable = {
   image: string;
   textIcon: string;
   num?: number;

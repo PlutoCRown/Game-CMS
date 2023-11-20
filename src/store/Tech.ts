@@ -1,19 +1,30 @@
-import { IRecipe, ITechnology } from "@/types/Biz";
+import { ITechnology } from "@/types/Biz";
 import { ActionSet, ActionGet } from "@/types/store";
 
-export const RecipeAsset = {
-  tech: [] as ITechnology[],
+export const TechAsset = {
+  technology: [
+    {
+      id: "t1",
+      name: "test tech",
+      description: "string",
+      image: "",
+      textIcon: "🔯",
+      prerequisites: [],
+      necessary: [],
+      event: [],
+    },
+  ] as ITechnology[],
 };
 
-export const ItemAssetAction = (
-  set: ActionSet<typeof RecipeAsset>,
-  get: ActionGet<typeof RecipeAsset>
+export const TechnologyAction = (
+  set: ActionSet<typeof TechAsset>,
+  get: ActionGet<typeof TechAsset>
 ) => ({
-  itemAction: {
-    addItemAsset: (tech: ITechnology) =>
+  TechnologyAction: {
+    addAsset: (tech: ITechnology) =>
       set((state) => {
-        state.tech.push(tech);
+        state.technology.push(tech);
       }),
-    getItem: () => get().tech,
+    getAsset: () => get().technology,
   },
 });

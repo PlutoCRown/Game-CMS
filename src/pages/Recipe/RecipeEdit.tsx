@@ -1,12 +1,13 @@
-import { Button, Flex, Form, Input, Modal, theme } from "antd";
+import { Button, Flex, Form, Input, Modal, message, theme } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
 import { useGlobalStore } from "@/store";
 import { SearchOutlined } from "@ant-design/icons";
 import RecipeAssetList from "./RecipeAssetList";
-import { IItem, IMachine, Item, ItemID } from "@/types/Biz";
 import ItemGridLayout from "../Item/ItemGridLayout";
 import ItemPreview from "../Item/ItemPreview";
+import { ItemID, IItem, Item } from "@/types/Item";
+import { IMachine } from "@/types/Machine";
 
 const RecipeEdit = () => {
   const [form] = Form.useForm();
@@ -34,17 +35,19 @@ const RecipeEdit = () => {
         "image",
       ]);
       addRecipe({
-        id: `Item_${Math.random().toString(36).substring(2)}`,
-        name,
+        id: `Recipe_${Math.random().toString(36).substring(2)}`,
+        name: name || product[0].name,
         description,
         image: image || product[0].image,
         textIcon: product[0].textIcon,
-        ingredients: ingredients,
-        products: product,
-        manufacturer: manu,
+        ingredients: ingredients.map((i) => ({ items: i.id, num: i.num })),
+        products: product.map((i) => ({ items: i.id, num: i.num })),
+        manufacturer: manu.id,
       });
       Clear();
       setOpen(false);
+    } else {
+      message.error("Please select a manufacturer");
     }
   };
   const Clear = () => {

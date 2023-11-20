@@ -54,6 +54,11 @@ const menuItems = [
 const Index = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [route, setRoute] = useState<string[]>(["7", "Edit"]);
+  const bi = ((i) => [
+    { title: i?.label },
+    { title: i?.children?.find((i) => i?.key == route[0]).label },
+  ])(menuItems.find((i) => i?.key == route[1]));
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -67,8 +72,8 @@ const Index = () => {
         onCollapse={(value) => setCollapsed(value)}
       >
         <Menu
-          defaultOpenKeys={["Play", "Edit"]}
-          defaultSelectedKeys={["1"]}
+          defaultOpenKeys={["Edit"]}
+          defaultSelectedKeys={["6"]}
           mode="inline"
           items={menuItems}
           onClick={(e) => setRoute(e.keyPath)}
@@ -76,13 +81,7 @@ const Index = () => {
       </Sider>
       <Layout>
         <Header style={{ padding: 22, background: colorBgContainer }}>
-          <Breadcrumb
-            style={{ fontWeight: "bold" }}
-            items={((i) => [
-              i?.label,
-              i?.children?.find((i) => i?.key == route[0]).label,
-            ])(menuItems.find((i) => i?.key == route[1]))}
-          ></Breadcrumb>
+          <Breadcrumb style={{ fontWeight: "bold" }} items={bi}></Breadcrumb>
         </Header>
         <Content style={{ margin: "16px" }}>
           <div

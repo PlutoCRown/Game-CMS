@@ -1,4 +1,4 @@
-import { IRecipe, Recipe, RecipeID } from "@/types/Biz";
+import { IRecipe, Recipe, RecipeID } from "@/types/Recipe";
 import { ActionSet, ActionGet } from "@/types/store";
 
 export const RecipeAsset = {

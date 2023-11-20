@@ -1,12 +1,11 @@
-import { IRecipe } from "@/types/Biz";
 import { Table, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import ItemIcon from "../Item/ItemIcon";
 import RecipeIcon from "./RecipeIcon";
 import { useGlobalStore } from "@/store";
-import ItemGrid from "../Item/ItemGrid";
+import ItemGridLayout from "../Item/ItemGridLayout";
+import { RRecipe } from "@/types/Recipe";
 
-const columns: ColumnsType<IRecipe> = [
+const columns: ColumnsType<RRecipe> = [
   {
     title: "Icon",
     key: "textIcon",
@@ -27,21 +26,33 @@ const columns: ColumnsType<IRecipe> = [
     title: "Ingredient",
     key: "ingredients",
     dataIndex: "ingredients",
-    render: (_, { ingredients }) =>
-      ingredients.map((ingredient) => <ItemGrid item={ingredient} />),
+    render: (_, { ingredients }) => (
+      <ItemGridLayout items={ingredients} onItemClick={() => {}} />
+    ),
   },
   {
     title: "Products",
     key: "products",
     dataIndex: "products",
-    render: (_, { products }) =>
-      products.map((product) => <ItemGrid item={product} />),
+    render: (_, { products }) => (
+      <ItemGridLayout items={products} onItemClick={() => {}} />
+    ),
   },
 ];
 
 const RecipeAssetList = () => {
   const recipe = useGlobalStore((state) => state.recipe);
-  return <Table columns={columns} dataSource={recipe} />;
+  const item = useGlobalStore((state) => state.item);
+  const machine = useGlobalStore((state) => state.machine.placeable);
+
+  const datac: RRecipe[] = recipe.map((r) => ({
+    ...r,
+    ingredients: r.ingredients.map((i) => item.find((ii) => ii.id == i)),
+    products: r.products.map((i) => item.find((ii) => ii.id == i)),
+    manufacturer: machine.find((m) => m.id == r.manufacturer),
+  }));
+
+  return <Table columns={columns} dataSource={datac} />;
 };
 
 export default RecipeAssetList;

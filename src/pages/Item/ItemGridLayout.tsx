@@ -1,20 +1,22 @@
-import { IItem } from "@/types/Biz";
 import React from "react";
 import ItemGrid from "./ItemGrid";
+import ItemIcon, { Iconable } from "./ItemIcon";
+import { IItem } from "@/types/Item";
 
 const ItemGridLayout: React.FC<{
-  items: IItem[];
+  items: IItem[] | Iconable[];
   onItemClick: (item: IItem) => void;
-}> = ({ items, onItemClick }) => {
+  onlyIcon?: boolean;
+}> = ({ items, onItemClick, onlyIcon }) => {
   return (
     <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-      {items.map((i) => (
+      {items.map((i, index) => (
         <span
-          onClick={() => onItemClick(i)}
-          key={i.id}
+          onClick={() => onItemClick(i as IItem)}
+          key={"id" in i ? i.id : index}
           style={{ cursor: "pointer" }}
         >
-          <ItemGrid item={i} />
+          {onlyIcon ? <ItemIcon item={i} /> : <ItemGrid item={i as IItem} />}
         </span>
       ))}
     </div>
