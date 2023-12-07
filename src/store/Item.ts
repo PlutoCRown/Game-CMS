@@ -1,6 +1,5 @@
-import { IItem, Item, ItemID } from "@/types/Biz";
 import { ActionSet, ActionGet } from "@/types/store";
-import { state } from "./count";
+import { IItem, Item, ItemID } from "@/types/Item";
 
 export const ItemAsset = {
   item: [
@@ -77,6 +76,10 @@ export const ItemAssetAction = (
   get: ActionGet<typeof ItemAsset>
 ) => ({
   itemAction: {
+    getItemByID: (id: ItemID | undefined) => {
+      if (!id) return null;
+      return get().item.find((i) => i.id === id);
+    },
     addItemAsset: (item: IItem) =>
       set((state) => {
         state.item.push(item);

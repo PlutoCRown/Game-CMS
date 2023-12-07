@@ -3,16 +3,18 @@ import { RMachine } from "@/types/Machine";
 import { RRecipe } from "@/types/Recipe";
 
 export const useRRecipe: () => RRecipe[] = () => {
+  console.log("we will imporve this function pref");
   const recipe = useGlobalStore((state) => state.recipe);
   const items = useGlobalStore((state) => state.item);
   const placeable = useGlobalStore((state) => state.machine.placeable);
-  debugger;
   const res = recipe.map(
     (r) =>
       ({
         ...r,
-        ingredients: r.ingredients.map((i) => items.find((ii) => ii.id == i)),
-        products: r.products.map((i) => items.find((ii) => ii.id == i)),
+        ingredients: r.ingredients.map((i) =>
+          items.find((ii) => ii.id == i.items)
+        ),
+        products: r.products.map((i) => items.find((ii) => ii.id == i.items)),
         manufacturer: placeable.find((m) => m.id == r.manufacturer) || "Hand",
       } as RRecipe)
   );

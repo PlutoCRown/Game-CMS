@@ -1,7 +1,7 @@
-import { IItem } from "@/types/Biz";
 import React from "react";
 import ItemIcon from "./ItemIcon";
 import { Flex } from "antd";
+import { IItem } from "@/types/Item";
 
 const ItemPreview: React.FC<{
   item?: IItem | null;

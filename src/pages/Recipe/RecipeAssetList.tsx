@@ -5,6 +5,7 @@ import { useGlobalStore } from "@/store";
 import ItemGridLayout from "../Item/ItemGridLayout";
 import { RRecipe } from "@/types/Recipe";
 import { useRRecipe } from "@/hook/useR";
+import React from "react";
 
 const columns: ColumnsType<RRecipe> = [
   {
@@ -43,8 +44,8 @@ const columns: ColumnsType<RRecipe> = [
 
 const RecipeAssetList: React.FC = () => {
   const rRecipe = useRRecipe();
-  console.log("是不是呢", rRecipe);
+  console.log("表格你也刷啊？", rRecipe);
   return <Table columns={columns} dataSource={rRecipe} />;
 };
 
-export default RecipeAssetList;
+export default React.memo(RecipeAssetList);

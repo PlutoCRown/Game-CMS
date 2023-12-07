@@ -23,7 +23,7 @@ const RecipeEdit = () => {
   }, new Map<ItemID, IMachine>());
 
   const rMachine = useRMachine();
-
+  const getItemByID = useGlobalStore((state) => state.itemAction.getItemByID);
   const [open, setOpen] = useState(false);
   const [pickingProduct, setPicking] = useState(false);
   const [ingredients, setIngredients] = useState<Item[]>([]);
@@ -39,7 +39,7 @@ const RecipeEdit = () => {
       ]);
       addRecipe({
         id: `Recipe_${Math.random().toString(36).substring(2)}`,
-        name: name || product[0].name,
+        name: name || product[0]?.name || "虚空配方",
         description,
         image: image || product[0].image,
         textIcon: product[0].textIcon,
@@ -183,7 +183,7 @@ const RecipeEdit = () => {
                 <ItemGridLayout items={product} onItemClick={removePick} />
               </div>
             </Form.Item>
-            <ItemPreview item={manu?.item} />
+            <ItemPreview item={getItemByID(manu?.item)} />
           </Form>
         </Flex>
       </Modal>

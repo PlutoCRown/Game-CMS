@@ -1,5 +1,7 @@
 # 创建项目
 `pnpm create rspack@latest`
+注意使用 @rspack/cli v0.3.11
+升级到0.4请查看 https://github.com/rspack-contrib/rspack-examples/pull/2
 
 # 启动项目
 ```bash

@@ -19,6 +19,7 @@ import Nothing from "./Nothing";
 import TechEdit from "./Tech/TechEdit";
 import RecipeEdit from "./Recipe/RecipeEdit";
 import MachinePage from "./Machine/MachinePage";
+import { Component } from "./Sence/test";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -53,7 +54,7 @@ const menuItems = [
 
 const Index = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [route, setRoute] = useState<string[]>(["7", "Edit"]);
+  const [route, setRoute] = useState<string[]>(["6", "Edit"]);
   const bi = ((i) => [
     { title: i?.label },
     { title: i?.children?.find((i) => i?.key == route[0]).label },
@@ -98,7 +99,7 @@ const Index = () => {
                 "3": <Nothing />,
                 "4": <Nothing />,
                 "5": <Nothing />,
-                "6": <Nothing />,
+                "6": <Component />,
                 "7": <ItemEdit />,
                 "8": <TechEdit />,
                 "9": <RecipeEdit />,

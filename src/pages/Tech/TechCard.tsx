@@ -1,8 +1,11 @@
-import { ITechnology, Technology } from "@/types/Biz";
 import React from "react";
-import ItemIcon from "../Item/ItemIcon";
 import "./test.css";
-import { TechStatus, TechStatusMapColor } from "@/types/Tech";
+import {
+  ITechnology,
+  TechStatus,
+  TechStatusMapColor,
+  Technology,
+} from "@/types/Tech";
 
 const TechCard: React.FC<
   | {
