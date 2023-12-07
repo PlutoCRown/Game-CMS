@@ -1,7 +1,6 @@
 import { useGlobalStore } from "@/store";
-import { IItem } from "@/types/Biz";
-import { ItemQualityMapColor } from "@/types/Item";
-import { Space, Table, Tag, Tooltip } from "antd";
+import { IItem, ItemQualityMapColor } from "@/types/Item";
+import { Table, Tag, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import ItemIcon from "./ItemIcon";
 

@@ -5,9 +5,11 @@ import React, { useRef, useState } from "react";
 import { useForm } from "antd/es/form/Form";
 import { useGlobalStore } from "@/store";
 import ItemGridLayout from "../Item/ItemGridLayout";
-import { IRecipe, ITechnology, RecipeID, TechnologyID } from "@/types/Biz";
 import TechCard from "./TechCard";
 import { Iconable } from "../Item/ItemIcon";
+import { RandomTechIcon } from "@/util/mock";
+import { IRecipe, RecipeID } from "@/types/Recipe";
+import { ITechnology, TechnologyID } from "@/types/Tech";
 
 const TechEdit: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -44,23 +46,11 @@ const TechEdit: React.FC = () => {
       name,
       description,
       image: "",
-      textIcon: [
-        "☸️",
-        "✡️",
-        "🔯",
-        "☢️",
-        "☣️",
-        "✴️",
-        "🔮",
-        "⚗️",
-        "🔋",
-        "🔬",
-        "🧬",
-        "🧪",
-      ][Math.floor(Math.random() * 12)],
+      textIcon: RandomTechIcon[Math.floor(Math.random() * 12)],
       prerequisites: addedPrTech.map((i) => i.id),
       necessary: addedRecipe.map((i) => i.id),
       event: addedEvent,
+      unlockRecipes: [],
     });
   };
   const AddEvent = () => {

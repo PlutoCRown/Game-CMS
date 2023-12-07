@@ -1,4 +1,4 @@
-import { ITechnology } from "@/types/Biz";
+import { ITechnology, TechnologyID } from "@/types/Tech";
 import { ActionSet, ActionGet } from "@/types/store";
 
 export const TechAsset = {
@@ -12,6 +12,7 @@ export const TechAsset = {
       prerequisites: [],
       necessary: [],
       event: [],
+      unlockRecipes: [],
     },
   ] as ITechnology[],
 };
@@ -21,6 +22,10 @@ export const TechnologyAction = (
   get: ActionGet<typeof TechAsset>
 ) => ({
   TechnologyAction: {
+    getTechByID: (id: TechnologyID | undefined) => {
+      if (!id) return null;
+      return get().technology.find((i) => i.id === id);
+    },
     addAsset: (tech: ITechnology) =>
       set((state) => {
         state.technology.push(tech);

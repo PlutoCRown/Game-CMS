@@ -10,6 +10,10 @@ export const RecipeAction = (
   get: ActionGet<typeof RecipeAsset>
 ) => ({
   recipeAction: {
+    getRecipeByID: (id: RecipeID | undefined) => {
+      if (!id) return null;
+      return get().recipe.find((i) => i.id === id);
+    },
     addAsset: (item: IRecipe) =>
       set((state) => {
         state.recipe.push(item);

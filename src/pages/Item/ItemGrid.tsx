@@ -1,7 +1,7 @@
-import { IItem, Item } from "@/types/Biz";
 import React from "react";
 import ItemIcon from "./ItemIcon";
 import { Tooltip } from "antd";
+import { IItem, Item } from "@/types/Item";
 
 const ItemGrid: React.FC<{ item: Item | IItem }> = ({ item }) => {
   return (

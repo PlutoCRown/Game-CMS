@@ -1,4 +1,3 @@
-import { IItem } from "@/types/Biz";
 import { ItemQuality, ItemQualityMapColor } from "@/types/Item";
 import React from "react";
 export type Iconable = {

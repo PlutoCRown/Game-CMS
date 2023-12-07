@@ -35,8 +35,12 @@ export const useRMachine: () => RMachine[] = () => {
 
 export const useRTech: () => any[] = () => {
   const recipe = useGlobalStore((state) => state.recipe);
-  const items = useGlobalStore((state) => state.item);
   const placeable = useGlobalStore((state) => state.machine.placeable);
-
-  return [];
+  const tech = useGlobalStore((state) => state.technology);
+  const getItemById = useGlobalStore((state) => state.itemAction.getItemByID);
+  return tech.map((t) => ({
+    ...t,
+    necessary: t.necessary.map((i) => getItemById(i)),
+    prerequisites: t.prerequisites.map((p) => tech.find((g) => g.id == p)),
+  }));
 };

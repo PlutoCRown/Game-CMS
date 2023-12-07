@@ -14,6 +14,7 @@ export const TechStatusMapColor: Record<TechStatus, string> = {
 };
 
 import { ItemID, Item } from "./Item";
+import { Recipe, RecipeID } from "./Recipe";
 
 export type TechnologyID = string;
 
@@ -26,12 +27,17 @@ export type ITechnology = {
   textIcon: string;
   prerequisites: TechnologyID[];
   necessary: ItemID[];
+  unlockRecipes: RecipeID[];
   event: { key: string; value: string }[];
 };
 
 // 实例技术 ｜ 状态
-export type Technology = Omit<ITechnology, "prerequisites" | "necessary"> & {
+export type Technology = Omit<
+  ITechnology,
+  "prerequisites" | "necessary" | "unlockRecipes"
+> & {
   status: TechStatus;
   prerequisites: Technology[];
   necessary: Item[];
+  unlockRecipes: Recipe[];
 };
