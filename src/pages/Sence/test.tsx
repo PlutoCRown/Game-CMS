@@ -6,15 +6,9 @@ const useA = () => {
   return { a, setA };
 };
 
-const useB = () => {
-  const [b, setB] = useState(1);
-  return { b, setB };
-};
-
 const useC = () => {
   const { a } = useA();
-  const { b } = useB();
-  return a + b;
+  return a;
 };
 
 export const Component = () => {
@@ -23,7 +17,7 @@ export const Component = () => {
   return (
     <>
       <Button onClick={() => setA((a) => a + 1)}>{v}</Button>
-      <Button onClick={() => setA((a) => a++)}>{a}</Button>
+      <Button onClick={() => setA((a) => a + 1)}>{a}</Button>
     </>
   );
 };

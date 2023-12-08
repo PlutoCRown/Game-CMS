@@ -3,7 +3,7 @@ import { IRecipe, RRecipe } from "@/types/Recipe";
 import React from "react";
 
 const RecipeIcon: React.FC<{ item: RRecipe }> = ({ item }) => {
-  return item && item.image !== "" ? (
+  return item && item.image !== "" && item.image !== undefined ? (
     <img
       src={item.image}
       style={{
@@ -33,7 +33,7 @@ const RecipeIcon: React.FC<{ item: RRecipe }> = ({ item }) => {
           ],
       }}
     >
-      {item.textIcon}
+      {item.textIcon || item.products[0]?.textIcon}
     </div>
   );
 };

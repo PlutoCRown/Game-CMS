@@ -22,8 +22,9 @@ const TechCard: React.FC<
     }
 > = ({ item, onClick, size, status }) => {
   const style = {
-    width: size == "small" ? "70px" : "140px",
-    height: size == "small" ? "100px" : "200px",
+    "--tech-name": `"${item.name}"`,
+    width: size == "small" ? "70px" : "105px",
+    height: size == "small" ? "100px" : "150px",
     backgroundColor:
       "status" in item
         ? TechStatusMapColor[item.status]

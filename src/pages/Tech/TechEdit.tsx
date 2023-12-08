@@ -10,6 +10,7 @@ import { Iconable } from "../Item/ItemIcon";
 import { RandomTechIcon } from "@/util/mock";
 import { IRecipe, RecipeID } from "@/types/Recipe";
 import { ITechnology, TechnologyID } from "@/types/Tech";
+import TechPanel from "./TechPanel";
 
 const TechEdit: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -40,7 +41,7 @@ const TechEdit: React.FC = () => {
   };
 
   const submitAddTech = () => {
-    const [name, description] = form.getFieldsValue(["name", "description"]);
+    const { name, description } = form.getFieldsValue(["name", "description"]);
     addTech({
       id: `Tech_${Math.random().toString(36).substring(2)}`,
       name,
@@ -52,6 +53,10 @@ const TechEdit: React.FC = () => {
       event: addedEvent,
       unlockRecipes: [],
     });
+    setOpen(false);
+    addEvent([]);
+    addRecipe([]);
+    addPrTech([]);
   };
   const AddEvent = () => {
     const name = form.getFieldValue("eventName");
@@ -83,7 +88,7 @@ const TechEdit: React.FC = () => {
         <Flex gap={8}>
           <Flex vertical gap={8} style={{ flexGrow: 1 }}>
             Prerequisites:
-            <Flex vertical wrap="wrap">
+            <Flex gap={8} wrap="wrap">
               {tech.map((i) => (
                 <TechCard
                   item={i}
@@ -106,7 +111,7 @@ const TechEdit: React.FC = () => {
               }}
             >
               <Input
-                placeholder="Search..."
+                placeholder="Search Recipes..."
                 prefix={<SearchOutlined />}
               ></Input>
               <ItemGridLayout
@@ -188,6 +193,7 @@ const TechEdit: React.FC = () => {
       >
         Add
       </Button>
+      <TechPanel />
     </>
   );
 };

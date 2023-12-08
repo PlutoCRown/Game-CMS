@@ -7,7 +7,7 @@ export type Iconable = {
   quality?: ItemQuality;
 };
 const ItemIcon: React.FC<{ item: Iconable }> = ({ item }) => {
-  return item && item.image !== "" ? (
+  return item && item.image !== "" && item.image !== undefined ? (
     <img
       src={item.image}
       style={{

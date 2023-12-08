@@ -14,7 +14,7 @@
 }
 
 .tech-card::after {
-  content: "NAME";
+  content: var(--tech-name);
   text-overflow: ellipsis;
   position: absolute;
   width: 100%;
@@ -25,4 +25,7 @@
   color: #FFF;
   padding: 1px 5px;
   box-sizing: border-box;
+  overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

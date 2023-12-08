@@ -3,7 +3,18 @@ import { ActionSet, ActionGet } from "@/types/store";
 
 export const MachineAsset = {
   machine: {
-    placeable: [] as IMachine[],
+    placeable: [
+      {
+        id: "m1",
+        name: "Machine",
+        item: "r7",
+        image: "",
+        textIcon: "",
+        fuelType: "N",
+        fuelValue: 0,
+        slotType: "free",
+      },
+    ] as IMachine[],
     structure: [] as Machine[],
     NONE: "Hand",
   },

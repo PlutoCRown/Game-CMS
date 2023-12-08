@@ -2,7 +2,27 @@ import { IRecipe, Recipe, RecipeID } from "@/types/Recipe";
 import { ActionSet, ActionGet } from "@/types/store";
 
 export const RecipeAsset = {
-  recipe: [] as IRecipe[],
+  recipe: [
+    {
+      id: "c1",
+      name: "cook",
+      description: "",
+      textIcon: "⚙️",
+      ingredients: [
+        {
+          items: "r10",
+          num: 2,
+        },
+      ],
+      products: [
+        {
+          items: "r3",
+          num: 1,
+        },
+      ],
+      manufacturer: "m1",
+    },
+  ] as IRecipe[],
 };
 
 export const RecipeAction = (
