@@ -1,17 +1,14 @@
-export const join = <T, U extends { id: any }>(
-  left: ReadonlyArray<T>,
-  right: ReadonlyArray<U>,
-  selector: keyof T
-): Array<T & any> => {
-  return left.map((item) => {
-    return {
-      ...item,
-      [selector]:
-        Object.prototype.toString.call(item[selector]) == "[object Array]"
-          ? (item[selector] as Array<any>).map((id) =>
-              right.find((obj) => id === obj.id)
-            )
-          : right.find((obj) => item[selector] === obj.id),
-    };
-  });
+import { Array2Map } from "./Array2Map";
+
+export const join = (
+  left: any[],
+  right: any[],
+  left_in: string,
+  right_in: string = "id"
+) => {
+  const rightMapper = Array2Map(right, right_in);
+  return left.map((leftItem) => ({
+    ...leftItem,
+    [left_in]: rightMapper.get(leftItem[left_in]),
+  }));
 };
