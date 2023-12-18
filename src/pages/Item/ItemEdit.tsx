@@ -1,48 +1,92 @@
 import { Button, Flex, Form, Input, Modal, Slider } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import ItemAssetList from "./ItemAssetList";
-import { ItemQualityArray } from "@/types/Item";
+import { IItem, ItemID, ItemQualityArray } from "@/types/Item";
 import { useGlobalStore } from "@/store";
-import { SearchOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  FileAddOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 import ItemPreview from "./ItemPreview";
+import { randomItemID } from "@/util/RandomID";
 
 const ItemEdit = () => {
   const [open, setOpen] = useState(false);
+  const [editingItem, setEditingItem] = useState<ItemID | null>(null);
   const addItem = useGlobalStore((state) => state.itemAction.addItemAsset);
+  const qualityMapper = Object.assign({}, ItemQualityArray as any);
   const submitAddItem = () => {
-    const { name, description, textIcon, quality } = form.getFieldsValue([
+    const field = form.getFieldsValue([
       "name",
       "description",
       "textIcon",
       "quality",
     ]);
-    addItem({
-      id: `Item_${Math.random().toString(36).substring(2)}`,
-      name,
-      description,
-      textIcon,
-      quality: Object.assign({}, ItemQualityArray as any)[quality],
-      image: "",
-    });
+    if (editingItem) {
+      addItem({
+        id: editingItem,
+        ...field,
+        quality: qualityMapper[field.quality],
+        image: "",
+      });
+    } else {
+      addItem({
+        id: randomItemID(),
+        ...field,
+        quality: qualityMapper[field.quality],
+        image: "",
+      });
+    }
     form.resetFields();
     setOpen(false);
   };
-
   const [form] = Form.useForm();
+
+  const openEditDialog = useCallback(
+    (item: IItem) => {
+      console.log(item);
+      // setEditingItem(item.id);
+      // form.setFieldsValue({
+      //   name: item.name,
+      //   description: item.description,
+      //   textIcon: item.textIcon,
+      //   quality: item.quality,
+      //   image: item.image,
+      // });
+      // setOpen(true);
+    },
+    [form]
+  );
+
+  const ModalProps = useMemo(
+    () => ({
+      forceRender: true,
+      title: "Item Editor",
+      onOk: submitAddItem,
+      onCancel: () => setOpen(false),
+      width: 1000,
+      okButtonProps: {
+        icon: editingItem ? <EditOutlined /> : <FileAddOutlined />,
+      },
+      okText: editingItem ? "Save" : "Add",
+      cancelText: editingItem ? "Delete" : "Cancel",
+      cancelButtonProps: {
+        ...(editingItem ? { danger: true, type: "primary" as "primary" } : {}),
+        icon: editingItem ? <DeleteOutlined /> : <CloseOutlined />,
+      },
+    }),
+    [editingItem]
+  );
 
   return (
     <>
-      <Modal
-        forceRender
-        title="Basic Modal"
-        open={open}
-        onOk={submitAddItem}
-        onCancel={() => setOpen(false)}
-        width={1000}
-      >
+      <Modal open={open} {...ModalProps}>
         <Flex gap={8}>
-          <Flex vertical gap={8}>
+          <Flex vertical gap={8} style={{ flexShrink: 1 }}>
             <ItemPreview />
             <div
               style={{
@@ -64,7 +108,7 @@ const ItemEdit = () => {
             labelCol={{ span: 6 }}
             wrapperCol={{ span: 16 }}
             form={form}
-            style={{ flexBasis: 0, flexGrow: 2 }}
+            style={{ flexBasis: 0, flexGrow: 2, minWidth:"35em" }}
           >
             <Form.Item label="Name" name="name">
               <Input placeholder="input placeholder" />
@@ -95,7 +139,7 @@ const ItemEdit = () => {
       >
         Add
       </Button>
-      <ItemAssetList />
+      <ItemAssetList onClick={openEditDialog} />
     </>
   );
 };

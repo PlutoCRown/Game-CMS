@@ -3,6 +3,7 @@ import { IItem, ItemQualityMapColor } from "@/types/Item";
 import { Table, Tag, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import ItemIcon from "./ItemIcon";
+import React from "react";
 
 const columns: ColumnsType<IItem> = [
   {
@@ -49,14 +50,17 @@ const columns: ColumnsType<IItem> = [
   },
 ];
 
-const ItemAssetList = () => {
+const ItemAssetList: React.FC<{
+  onClick?: (item: IItem) => any;
+}> = ({}) => {
   const items = useGlobalStore((state) => state.item);
   return (
     <Table
+      // onRow={onClick}
       columns={columns}
       dataSource={items.map((i) => ({ ...i, key: i.id }))}
     />
   );
 };
 
-export default ItemAssetList;
+export default React.memo(ItemAssetList);
