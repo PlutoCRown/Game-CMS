@@ -1,6 +1,6 @@
 import { Button, Flex, Form, Input, Modal, message, theme } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useGlobalStore } from "@/store";
 import { SearchOutlined } from "@ant-design/icons";
 import RecipeAssetList from "./RecipeAssetList";
@@ -29,7 +29,6 @@ const RecipeEdit = () => {
   const [ingredients, setIngredients] = useState<Item[]>([]);
   const [product, setProduct] = useState<Item[]>([]);
   const [manu, setManu] = useState<IMachine | null>(null);
-
   const submitAddRecipe = () => {
     if (manu) {
       const { name, description, image } = form.getFieldsValue([
@@ -98,13 +97,16 @@ const RecipeEdit = () => {
     setManu(MapItem2Machine.get(item.id) || null);
   };
 
-  const selfAssetStyle = {
-    flexBasis: 0,
-    flexGrow: 1,
-    backgroundColor: token.colorFillContent,
-    borderRadius: 8,
-    padding: 12,
-  };
+  const selfAssetStyle = useMemo(
+    () => ({
+      flexBasis: 0,
+      flexGrow: 1,
+      backgroundColor: token.colorFillContent,
+      borderRadius: 8,
+      padding: 12,
+    }),
+    []
+  );
   return (
     <>
       <Modal
