@@ -13,14 +13,14 @@ import {
   PlayCircleOutlined,
   RadarChartOutlined,
 } from "@ant-design/icons";
-import { Breadcrumb, Flex, Layout, Menu, Space, theme } from "antd";
+import { Avatar, Breadcrumb, Flex, Layout, Menu, Space, theme } from "antd";
 import ItemEdit from "./Item/ItemEdit";
 import Nothing from "./Nothing";
 import TechEdit from "./Tech/TechEdit";
 import RecipeEdit from "./Recipe/RecipeEdit";
 import MachinePage from "./Machine/MachinePage";
 import { Component } from "./Sence/test";
-
+import ProjectInfo from "./ProjectInfo";
 const { Header, Content, Footer, Sider } = Layout;
 
 const getItem = (
@@ -72,11 +72,13 @@ const Index = () => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
+        <ProjectInfo />
         <Menu
           defaultOpenKeys={["Edit"]}
           defaultSelectedKeys={["6"]}
           mode="inline"
           items={menuItems}
+          // @ts-ignore
           onClick={(e) => setRoute(e.keyPath)}
         />
       </Sider>
