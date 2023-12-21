@@ -64,7 +64,6 @@ const PlaceableEdit = () => {
               flexBasis: 0,
               flexGrow: 1,
               backgroundColor: token.colorFillContent,
-              borderRadius: 8,
               padding: 12,
             }}
           >

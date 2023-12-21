@@ -12,7 +12,6 @@ const ItemPreview: React.FC<{
         flexBasis: 0,
         flexGrow: 1,
         border: item ? "1px solid #0003" : "3px dashed #0002",
-        borderRadius: 12,
         padding: 12,
       }}
     >

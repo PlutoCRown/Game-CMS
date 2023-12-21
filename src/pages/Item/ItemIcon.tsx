@@ -12,7 +12,6 @@ const ItemIcon: React.FC<{ item: Iconable }> = ({ item }) => {
       src={item.image}
       style={{
         width: 48,
-        borderRadius: 12,
         height: 48,
       }}
     />
@@ -26,7 +25,6 @@ const ItemIcon: React.FC<{ item: Iconable }> = ({ item }) => {
         fontSize: 32,
         color: "#FFFE",
         textAlign: "center",
-        borderRadius: 12,
         height: 48,
         overflow: "hidden",
         backgroundColor: ItemQualityMapColor[item.quality || "normal"],

@@ -106,7 +106,6 @@ const TechEdit: React.FC = () => {
                 flexBasis: 0,
                 flexGrow: 2,
                 background: "#EEE",
-                borderRadius: 12,
                 padding: 12,
               }}
             >
@@ -141,7 +140,6 @@ const TechEdit: React.FC = () => {
                 style={{
                   width: "100%",
                   backgroundColor: "rgba(0, 0, 0, 0.06)",
-                  borderRadius: 8,
                   padding: 8,
                   minHeight: 54,
                 }}

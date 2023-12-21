@@ -93,7 +93,6 @@ const ItemEdit = () => {
                 flexBasis: 0,
                 flexGrow: 1,
                 background: "#EEE",
-                borderRadius: 12,
                 padding: 12,
               }}
             >
@@ -108,7 +107,7 @@ const ItemEdit = () => {
             labelCol={{ span: 6 }}
             wrapperCol={{ span: 16 }}
             form={form}
-            style={{ flexBasis: 0, flexGrow: 2, minWidth:"35em" }}
+            style={{ flexBasis: 0, flexGrow: 2, minWidth: "35em" }}
           >
             <Form.Item label="Name" name="name">
               <Input placeholder="input placeholder" />

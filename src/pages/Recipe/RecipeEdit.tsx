@@ -102,7 +102,6 @@ const RecipeEdit = () => {
       flexBasis: 0,
       flexGrow: 1,
       backgroundColor: token.colorFillContent,
-      borderRadius: 8,
       padding: 12,
     }),
     []
@@ -124,7 +123,7 @@ const RecipeEdit = () => {
                 placeholder="Search..."
                 prefix={<SearchOutlined />}
               ></Input>
-              <ItemGridLayout items={items} onItemClick={Pick} />
+              <ItemGridLayout items={items} onItemClick={Pick} wrap />
             </Flex>
             <Flex vertical gap={8} style={selfAssetStyle}>
               <Input
@@ -134,6 +133,7 @@ const RecipeEdit = () => {
               <ItemGridLayout
                 items={rMachine.map((i) => i.item)}
                 onItemClick={PickManu}
+                wrap
               />
             </Flex>
           </Flex>
@@ -158,10 +158,10 @@ const RecipeEdit = () => {
                 onClick={() => setPicking(false)}
                 style={{
                   width: "100%",
+                  transition: "background-color .3s",
                   backgroundColor: pickingProduct
                     ? token.colorFillContent
-                    : token.colorBgSpotlight,
-                  borderRadius: 8,
+                    : token.colorPrimary,
                   padding: 8,
                   minHeight: 54,
                 }}
@@ -174,10 +174,10 @@ const RecipeEdit = () => {
                 onClick={() => setPicking(true)}
                 style={{
                   width: "100%",
+                  transition: "background-color .3s",
                   backgroundColor: !pickingProduct
                     ? token.colorFillContent
-                    : token.colorBgSpotlight,
-                  borderRadius: 8,
+                    : token.colorPrimary,
                   padding: 8,
                   minHeight: 54,
                 }}

@@ -8,7 +8,6 @@ const RecipeIcon: React.FC<{ item: RRecipe }> = ({ item }) => {
       src={item.image}
       style={{
         width: 48,
-        borderRadius: 12,
         height: 48,
       }}
     />
@@ -22,7 +21,6 @@ const RecipeIcon: React.FC<{ item: RRecipe }> = ({ item }) => {
         color: "#FFFE",
         textAlign: "center",
         userSelect: "none",
-        borderRadius: 12,
         height: 48,
         overflow: "hidden",
         backgroundColor:
