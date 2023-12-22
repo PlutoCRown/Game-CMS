@@ -1,13 +1,25 @@
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import WorkerFactory from "@/util/WorkerFactory";
+import worker from "./worker";
 
 export const Component = () => {
-  const [counter, setCounter] = useState(0);
-  const a = {
-    counter: -counter,
+  const workerInstance = WorkerFactory(worker);
+  const [data, setData] = useState(null);
+  const [_, startTransition] = useTransition();
+
+  const processData = () => {
+    startTransition(() => {
+      workerInstance.onmessage = (event) => {
+        setData(event.data);
+      };
+      workerInstance.postMessage(data);
+    });
   };
+
   return (
-    <div onClick={() => setCounter(counter + 1)}>
-      {counter} <h2>{a.counter}</h2>
+    <div>
+      <button onClick={processData}>处理数据</button>
+      {data}
     </div>
   );
 };
