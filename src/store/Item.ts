@@ -84,19 +84,29 @@ export const ItemAssetAction = (
       set((state) => {
         state.item.push(item);
       }),
+    updateItemAsset: (item: IItem) =>
+      set((state) => {
+        Object.keys(state.item.find((i) => i.id === item.id) || {})
+          .filter((i) => i !== "id")
+          .forEach((k) => {
+            // @ts-ignore
+            mod[k] = item[k];
+          });
+      }),
     removeItemAsset: (item: Item | ItemID) => {
       set((state) => {
         let index = -1;
         if (typeof item == "string") {
-          index = state.item.findIndex((i) => i.id == item);
+          index = state.item.findIndex((i) => i.id === item);
         } else {
-          index = state.item.findIndex((i) => i.id == item.id);
+          index = state.item.findIndex((i) => i.id === item.id);
         }
         if (index !== -1) {
-          state.item[index] = state.item[state.item.length - 1];
+          state.item.splice(index, 1);
         }
       });
     },
     getItem: () => get().item,
   },
 });
+

@@ -15,16 +15,23 @@ export function Array2DeepMap<T extends Object>(
   for (let item of list) {
     let key = keyPath.toString();
     const keys = key.split(".");
-    for (const k of keys) {
-      if (item.hasOwnProperty(k)) {
-        // @ts-ignore
-        item = item[k];
-      } else {
-        throw new Error(`Invalid keyPath: ${key}`);
-      }
-    }
+    keys.map((k) =>
+      item.hasOwnProperty(k)
+        ? // @ts-ignore
+          (item = item[k])
+        : console.error(`路径错误: ${key}: ${keyPath}`)
+    );
     map.set(item, item);
   }
 
   return map;
+}
+
+export function reverseObject<T extends Record<any, any>>(obj: T) {
+  const reversedObj = {};
+  Object.keys(obj).forEach((key) => {
+    // @ts-ignore
+    reversedObj[obj[key]] = key;
+  });
+  return reversedObj as { [K in keyof T as `${T[K]}`]: K };
 }

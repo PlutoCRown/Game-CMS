@@ -6,38 +6,47 @@ import { ItemAsset, ItemAssetAction } from "./Item";
 import { RecipeAction, RecipeAsset } from "./Recipe";
 import { MachineAction, MachineAsset } from "./Machine";
 import { TechAsset, TechnologyAction } from "./Tech";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 // 扩展请 & 类型
 type State = typeof state &
-  ReturnType<typeof action> &
   typeof ItemAsset &
-  ReturnType<typeof ItemAssetAction> &
   typeof RecipeAsset &
-  ReturnType<typeof RecipeAction> &
   typeof TechAsset &
+  typeof MachineAsset;
+
+type Action = ReturnType<typeof action> &
+  ReturnType<typeof ItemAssetAction> &
+  ReturnType<typeof RecipeAction> &
   ReturnType<typeof TechnologyAction> &
-  typeof MachineAsset &
   ReturnType<typeof MachineAction>;
 
-export const useGlobalStore = create<State>()(
-  // persist(
+export const useGlobalStore = create<State & Action>()(
   immer((set, get) => ({
     // 扩展请解在这里
     ...state,
-    ...action(set, get),
     ...ItemAsset,
-    ...ItemAssetAction(set, get),
     ...RecipeAsset,
-    ...RecipeAction(set, get),
     ...MachineAsset,
-    ...MachineAction(set, get),
     ...TechAsset,
+    ...action(set, get),
+    ...ItemAssetAction(set, get),
+    ...RecipeAction(set, get),
+    ...MachineAction(set, get),
     ...TechnologyAction(set, get),
   }))
-  // {
-  //   name: "zustand-global-storage",
-  //   storage: createJSONStorage(() => localStorage),
-  //   version: 0, // 修改内容请更新这个数值！不可以缓存函数！
-  // }
-  // )
+);
+
+export const useHydrateStore = create(
+  persist(
+    () => ({
+      foo: 0,
+      bar: 1,
+    }),
+    {
+      name: "hydrated-storage",
+      storage: createJSONStorage(() => localStorage),
+      version: 0, // 修改内容请更新这个数值！不可以缓存
+    }
+  )
 );

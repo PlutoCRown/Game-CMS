@@ -24,7 +24,6 @@ const ItemAssetList: React.FC<{
     {
       title: "Description",
       dataIndex: "description",
-      width: 1000,
       key: "description",
     },
     {
