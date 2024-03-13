@@ -22,19 +22,29 @@ type Action = ReturnType<typeof action> &
   ReturnType<typeof MachineAction>;
 
 export const useGlobalStore = create<State & Action>()(
-  immer((set, get) => ({
-    // 扩展请解在这里
-    ...state,
-    ...ItemAsset,
-    ...RecipeAsset,
-    ...MachineAsset,
-    ...TechAsset,
-    ...action(set, get),
-    ...ItemAssetAction(set, get),
-    ...RecipeAction(set, get),
-    ...MachineAction(set, get),
-    ...TechnologyAction(set, get),
-  }))
+  persist(
+    immer((set, get) => ({
+      // 扩展请解在这里
+      ...state,
+      ...ItemAsset,
+      ...RecipeAsset,
+      ...MachineAsset,
+      ...TechAsset,
+      ...action(set, get),
+      ...ItemAssetAction(set, get),
+      ...RecipeAction(set, get),
+      ...MachineAction(set, get),
+      ...TechnologyAction(set, get),
+    })),
+    {
+      name: "global-storage",
+      storage: createJSONStorage(() => localStorage),
+      version: 0, // 修改内容请更新这个数值！不可以缓存
+      merge: (persistedState, currentState) => { // 合并action部分
+        return Object.assign({}, currentState, persistedState);
+      }
+    }
+  )
 );
 
 export const useHydrateStore = create(
@@ -47,6 +57,9 @@ export const useHydrateStore = create(
       name: "hydrated-storage",
       storage: createJSONStorage(() => localStorage),
       version: 0, // 修改内容请更新这个数值！不可以缓存
+      merge: (persistedState, currentState) => { // add this part
+        return Object.assign({}, currentState, persistedState);
+      } 
     }
   )
 );
