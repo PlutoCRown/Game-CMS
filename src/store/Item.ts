@@ -86,11 +86,11 @@ export const ItemAssetAction = (
       }),
     updateItemAsset: (item: IItem) =>
       set((state) => {
-        Object.keys(state.item.find((i) => i.id === item.id) || {})
+        const mod: IItem | any = state.item.find((i) => i.id === item.id)|| {}
+        Object.keys(mod)
           .filter((i) => i !== "id")
           .forEach((k) => {
-            // @ts-ignore
-            mod[k] = item[k];
+            mod[k] = item[k as keyof IItem];
           });
       }),
     removeItemAsset: (item: Item | ItemID) => {

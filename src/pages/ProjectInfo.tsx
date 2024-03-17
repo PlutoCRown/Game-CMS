@@ -1,7 +1,9 @@
 import React from "react";
 import LOGO from "@/assets/logo.png";
-import { Avatar, Flex, Modal } from "antd";
+import { Avatar, Button, Flex, Modal } from "antd";
 import { flushSync } from "react-dom";
+import { ExportData } from "@/helper/ExportData";
+import useExportable from "@/hook/userExportable";
 
 const ProjectInfo = () => {
   const [open, setOpen] = React.useState(false);
@@ -11,6 +13,9 @@ const ProjectInfo = () => {
       flushSync(() => setOpen(state));
     }).finished;
   };
+
+  const exportData = useExportable();
+
   return (
     <>
       <Modal open={open} title=" " onCancel={() => handleChange(false)}>
@@ -31,6 +36,18 @@ const ProjectInfo = () => {
               This is a project to showcase my skills and experience in building
               a web application.
             </p>
+            <Button onClick={() => ExportData(exportData, 0)}>
+              导出数据 (v+debug)
+            </Button>
+            <Button onClick={() => ExportData(exportData, 1)} type="primary">
+              导出数据 (v+Patch)
+            </Button>
+            <Button onClick={() => ExportData(exportData, 2)}>
+              导出数据 (v+Minor)
+            </Button>
+            <Button onClick={() => ExportData(exportData, 3)}>
+              导出数据 (v+Major)
+            </Button>
           </div>
         </Flex>
       </Modal>

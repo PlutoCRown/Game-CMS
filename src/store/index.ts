@@ -41,25 +41,15 @@ export const useGlobalStore = create<State & Action>()(
       storage: createJSONStorage(() => localStorage),
       version: 0, // 修改内容请更新这个数值！不可以缓存
       merge: (persistedState, currentState) => { // 合并action部分
-        return Object.assign({}, currentState, persistedState);
+        const p = persistedState as State
+        for(let key in p) {
+          if(Object.keys(p[key as keyof State]).length == 0) {
+            delete p[key as keyof State]
+          }
+        }
+        const a  = Object.assign({}, currentState, p);
+        return a
       }
-    }
-  )
-);
-
-export const useHydrateStore = create(
-  persist(
-    () => ({
-      foo: 0,
-      bar: 1,
-    }),
-    {
-      name: "hydrated-storage",
-      storage: createJSONStorage(() => localStorage),
-      version: 0, // 修改内容请更新这个数值！不可以缓存
-      merge: (persistedState, currentState) => { // add this part
-        return Object.assign({}, currentState, persistedState);
-      } 
     }
   )
 );

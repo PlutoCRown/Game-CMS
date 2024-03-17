@@ -23,7 +23,7 @@ const ItemIcon: React.FC<{ item: Iconable }> = ({ item }) => {
         userSelect: "none",
         width: 48,
         fontSize: 32,
-        color: "#FFFE",
+        color: item.quality == "normal" ? "#666" : "#FFFE",
         textAlign: "center",
         height: 48,
         overflow: "hidden",
