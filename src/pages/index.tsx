@@ -13,7 +13,7 @@ import {
   PlayCircleOutlined,
   RadarChartOutlined,
 } from "@ant-design/icons";
-import { Avatar, Breadcrumb, Flex, Layout, Menu, Space, theme } from "antd";
+import { Breadcrumb, Layout, Menu, theme } from "antd";
 import ItemEdit from "./Item/ItemEdit";
 import Nothing from "./Nothing";
 import TechEdit from "./Tech/TechEdit";
@@ -78,7 +78,6 @@ const Index = () => {
           defaultSelectedKeys={["6"]}
           mode="inline"
           items={menuItems}
-          // @ts-ignore
           onClick={(e) => setRoute(e.keyPath)}
         />
       </Sider>

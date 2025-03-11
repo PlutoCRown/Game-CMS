@@ -16,7 +16,7 @@ const App: React.FC = () => {
             console.log(getCount());
           }}
         >
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <img src={reactLogo} className="logo react" />
         </a>
         {count}
       </div>
