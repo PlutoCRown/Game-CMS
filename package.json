@@ -3,8 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev": "rspack serve",
-    "build": "rspack build"
+    "dev": "rsbuild dev --mode development",
+    "build": "rsbuild build"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
@@ -16,7 +16,11 @@
     "zustand": "^4.4.6"
   },
   "devDependencies": {
-    "@rspack/cli": "0.3.11",
+    "@rsbuild/core": "^1.1.10",
+    "@rsbuild/plugin-babel": "^1.0.3",
+    "@rsbuild/plugin-less": "^1.1.0",
+    "@rsbuild/plugin-react": "^1.1.0",
+    "@rsdoctor/rspack-plugin": "^0.4.12",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
     "typescript": "^5.0.4"
