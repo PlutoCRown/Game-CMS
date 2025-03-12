@@ -1,9 +1,9 @@
 import { useState, useTransition } from "react";
-import WorkerFactory from "@/util/WorkerFactory";
+import { createWorker } from "@/util/WorkerFactory";
 import worker from "./worker";
 
 export const Component = () => {
-  const workerInstance = WorkerFactory(worker);
+  const workerInstance = createWorker(worker);
   const [data, setData] = useState(null);
   const [_, startTransition] = useTransition();
 
