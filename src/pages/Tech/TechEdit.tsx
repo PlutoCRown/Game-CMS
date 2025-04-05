@@ -6,7 +6,7 @@ import { useForm } from "antd/es/form/Form";
 import { useGlobalStore } from "@/store";
 import ItemGridLayout from "../Item/ItemGridLayout";
 import TechCard from "./TechCard";
-import { Iconable } from "../Item/ItemIcon";
+import { Iconable } from "../../components/Item/ItemIcon";
 import { RandomTechIcon } from "@/util/mock";
 import { IRecipe, RecipeID } from "@/types/Recipe";
 import { ITechnology, TechnologyID } from "@/types/Tech";

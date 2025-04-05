@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import { randomItemID } from "@/util/RandomID";
 import { reverseObject } from "@/util/Array2Map";
+import styles from "./index.module.css";
 
 const ItemEdit = () => {
   const [open, setOpen] = useState(false);
@@ -116,14 +117,17 @@ const ItemEdit = () => {
     <>
       <Modal open={open} {...ModalProps}>
         <Flex gap={8} wrap="wrap">
-          <div style={{ flex: "1 1 0", background: "#EEE", padding: 12 }}>
-            <Input placeholder="Search..." prefix={<SearchOutlined />}></Input>
+          <div className={styles.select}>
+            <Input
+              placeholder="Search Sprite..."
+              prefix={<SearchOutlined />}
+            ></Input>
           </div>
           <Form
             labelCol={{ span: 6 }}
             wrapperCol={{ span: 16 }}
             form={form}
-            style={{ flex: "2 0 0", minWidth: "35em" }}
+            style={{ flex: "2 0 0", minWidth: "30em" }}
           >
             <Form.Item label="Name" name="name">
               <Input placeholder="input placeholder" />

@@ -1,7 +1,7 @@
 import { useGlobalStore } from "@/store";
 import { Space, Table, Tag, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import ItemIcon from "../Item/ItemIcon";
+import ItemIcon from "../../components/Item/ItemIcon";
 import { RMachine } from "@/types/Machine";
 
 const columns: ColumnsType<RMachine> = [

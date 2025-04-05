@@ -46,10 +46,9 @@ export const ItemAsset = {
     {
       id: "r5",
       name: "Brick",
-      textIcon: "🧱",
       quality: "rare",
       description: "Make by Stone in hand",
-      image: "",
+      image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAPxJREFUOE+lkzEOwjAMRZ2VO7Cx9xDcoXOlcoKOCIkgIcaegEqdewcO0b0bd2ANsmMHJ23agSyNEv8X+9s18OcyG3rH99m4NQCK8X4VkgM4sBU9Xrw/MHaDJDqLXwIEsQDwm4OkgEgMtjdFXbpxv4PmeoHWHGaZaIAX296ArXzdvEfx63SmozQTAcQvL7QGvZClIcHlxk3Q3u4UQ+nyPqi4nBTiAez42kxgBsfng0pBT7jE0Odf3Uxh08hEPNJiai1CbJ8MijJPhDoreVl3ZNaFtH7pgIjFTDbSxACcvLr07ZI6eRqjTLoh6MKmcZNTgwJobK51Grb1M23GfgEAu3YNDjapQQAAAABJRU5ErkJggg==",
     },
     {
       id: "r6",

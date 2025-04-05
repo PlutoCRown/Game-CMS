@@ -2,7 +2,7 @@ import { useGlobalStore } from "@/store";
 import { IItem, ItemQualityMapColor } from "@/types/Item";
 import { Table, Tag, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import ItemIcon from "./ItemIcon";
+import ItemIcon from "../../components/Item/ItemIcon";
 import React, { useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
 

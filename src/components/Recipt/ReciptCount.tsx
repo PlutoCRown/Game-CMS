@@ -1,9 +1,9 @@
 import React from "react";
-import ItemIcon from "./ItemIcon";
+import ItemIcon from "../Item/ItemIcon";
 import { Tooltip } from "antd";
 import { IItem, Item } from "@/types/Item";
 
-const ItemGrid: React.FC<{ item: Item | IItem }> = ({ item }) => {
+const ReciptCount: React.FC<{ item: Item | IItem }> = ({ item }) => {
   return (
     <Tooltip title={item.name}>
       <div style={{ position: "relative" }}>
@@ -28,4 +28,4 @@ const ItemGrid: React.FC<{ item: Item | IItem }> = ({ item }) => {
   );
 };
 
-export default ItemGrid;
+export default ReciptCount;

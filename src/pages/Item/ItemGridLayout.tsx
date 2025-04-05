@@ -1,6 +1,6 @@
 import React from "react";
-import ItemGrid from "./ItemGrid";
-import ItemIcon, { Iconable } from "./ItemIcon";
+import ItemCount from "../../components/Item/ItemCount";
+import ItemIcon, { Iconable } from "../../components/Item/ItemIcon";
 import { IItem } from "@/types/Item";
 
 const ItemGridLayout: React.FC<{
@@ -28,7 +28,7 @@ const ItemGridLayout: React.FC<{
           key={"id" in i ? i.id : index}
           style={{ cursor: "pointer" }}
         >
-          {onlyIcon ? <ItemIcon item={i} /> : <ItemGrid item={i as IItem} />}
+          {onlyIcon ? <ItemIcon item={i} /> : <ItemCount item={i as IItem} />}
         </span>
       ))}
     </div>

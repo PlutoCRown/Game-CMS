@@ -1,0 +1,45 @@
+.editorContainer {
+    margin-left: 20px;
+    image-rendering: pixelated;
+    background-position: 0px 0px;
+    flex-shrink: 0;
+}
+
+.canvas {
+    transform-origin: top left;
+    image-rendering: pixelated;
+}
+
+.addButton {
+    width: 100px;
+    height: calc(100px + 2em);
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.addButton:hover {
+    background-color: #eee;
+}
+
+
+.card {
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.card:hover {
+    background-color: #eee;
+}
+
+.card img {
+    image-rendering: pixelated;
+}
+
+.clearIcon {
+    width: 24;
+    height: 24;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    cursor: pointer;
+    background: linear-gradient(to bottom left, transparent 48%, red 48%, red 52%, transparent 52%);
+}

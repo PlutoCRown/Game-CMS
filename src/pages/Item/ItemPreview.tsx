@@ -1,5 +1,5 @@
 import React from "react";
-import ItemIcon from "./ItemIcon";
+import ItemIcon from "../../components/Item/ItemIcon";
 import { Flex } from "antd";
 import { IItem } from "@/types/Item";
 

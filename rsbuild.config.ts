@@ -57,6 +57,13 @@ export default defineConfig((config) => {
       //   },
       // }),
     ],
+    module: {
+      parser: {
+        'css/auto': {
+          namedExports: false,
+        },
+      },
+    },
     source: {
       define: {
         global: "window",

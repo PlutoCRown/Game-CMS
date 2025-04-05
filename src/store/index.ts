@@ -39,7 +39,7 @@ export const useGlobalStore = create<State & Action>()(
     {
       name: "global-storage",
       storage: createJSONStorage(() => localStorage),
-      version: 0, // 修改内容请更新这个数值！不可以缓存
+      version: 1, // 修改内容请更新这个数值！不可以缓存
       merge: (persistedState, currentState) => { // 合并action部分
         const p = persistedState as State
         for(let key in p) {
