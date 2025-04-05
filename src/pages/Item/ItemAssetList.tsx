@@ -67,6 +67,7 @@ const ItemAssetList: React.FC<{
   const items = useGlobalStore((state) => state.item);
   return (
     <Table
+      scroll={{ x: "100%" }}
       columns={columns}
       dataSource={items.map((i) => ({ ...i, key: i.id }))}
     />

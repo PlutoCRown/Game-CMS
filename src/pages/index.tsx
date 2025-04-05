@@ -8,7 +8,9 @@ import {
   BulbOutlined,
   DatabaseOutlined,
   ExperimentOutlined,
+  FormatPainterOutlined,
   FormOutlined,
+  PaperClipOutlined,
   PictureOutlined,
   PlayCircleOutlined,
   RadarChartOutlined,
@@ -21,6 +23,7 @@ import RecipeEdit from "./Recipe/RecipeEdit";
 import MachinePage from "./Machine/MachinePage";
 import { Component } from "./Sence/test";
 import ProjectInfo from "./ProjectInfo";
+import { PixelAssets } from "./PixelMaker";
 const { Header, Content, Footer, Sider } = Layout;
 
 const getItem = (
@@ -50,11 +53,14 @@ const menuItems = [
     getItem("Recipes", "9", <BookOutlined />),
     getItem("Machine", "10", <BlockOutlined />),
   ]),
+  getItem("工具", "Tool", <PaperClipOutlined />, [
+    getItem("Pixel Art", "11", <FormatPainterOutlined />),
+  ]),
 ];
 
 const Index = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [route, setRoute] = useState<string[]>(["6", "Edit"]);
+  const [route, setRoute] = useState<string[]>(["11", "Tool"]);
   const bi = ((i) => [
     { title: i?.label },
     { title: i?.children?.find((i) => i?.key == route[0]).label },
@@ -72,10 +78,10 @@ const Index = () => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
-        <ProjectInfo />
+        <ProjectInfo size={collapsed ? 80 : 200} />
         <Menu
-          defaultOpenKeys={["Edit"]}
-          defaultSelectedKeys={["6"]}
+          defaultOpenKeys={["Edit", "Tool"]}
+          defaultSelectedKeys={["11"]}
           mode="inline"
           items={menuItems}
           onClick={(e) => setRoute(e.keyPath)}
@@ -105,6 +111,7 @@ const Index = () => {
                 "8": <TechEdit />,
                 "9": <RecipeEdit />,
                 "10": <MachinePage />,
+                "11": <PixelAssets />,
               }[route[0]]
             }
           </div>
