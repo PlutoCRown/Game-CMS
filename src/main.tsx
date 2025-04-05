@@ -19,6 +19,11 @@ const Root = () => {
             colorPrimaryBgHover: "#f1d6ff",
             borderRadius: 0,
           },
+          components: {
+            Table: {
+              rowHoverBg: "#f1d6ff",
+            },
+          },
         }}
       >
         <MainPage></MainPage>

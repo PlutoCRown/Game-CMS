@@ -6,6 +6,7 @@ import {
   BranchesOutlined,
   BuildOutlined,
   BulbOutlined,
+  CodeOutlined,
   DatabaseOutlined,
   ExperimentOutlined,
   FormatPainterOutlined,
@@ -55,6 +56,7 @@ const menuItems = [
   ]),
   getItem("工具", "Tool", <PaperClipOutlined />, [
     getItem("Pixel Art", "11", <FormatPainterOutlined />),
+    getItem("Prototype", "12", <CodeOutlined />),
   ]),
 ];
 
@@ -112,6 +114,7 @@ const Index = () => {
                 "9": <RecipeEdit />,
                 "10": <MachinePage />,
                 "11": <PixelAssets />,
+                "12": <Nothing />,
               }[route[0]]
             }
           </div>

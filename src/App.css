@@ -10,9 +10,13 @@
 .logo:hover {
   transform: scale(0.9);
 }
-
+.overflow-x-scroll {
+  scrollbar-width: none;
+}
 .overflow-x-scroll::-webkit-scrollbar {
   height: 0;
+  width: 0;
+  display: none;
 }
 
 ::view-transition-image-new(logo),

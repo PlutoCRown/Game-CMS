@@ -7,7 +7,7 @@ export const PixelFileList = () => {
   return (
     <>
       {list.map((i, index) => (
-        <Flex vertical align="center" className={styles.card}>
+        <Flex vertical align="center" className={styles.card} key={i}>
           <img src={i} alt="" width={100} />
           <span>Untitle-{index}.png</span>
         </Flex>

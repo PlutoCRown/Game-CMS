@@ -105,7 +105,7 @@ const TechEdit: React.FC = () => {
               style={{
                 flexBasis: 0,
                 flexGrow: 2,
-                background: "#EEE",
+                background: "#f1d6ff",
                 padding: 12,
               }}
             >

@@ -1,6 +1,10 @@
 .select {
     flex : 1 1 0;
-    background: #EEE;
+    background: rgba(200, 143, 249, 0.06);
     padding: 12px;
 }
 
+
+.table tr  {
+    cursor: pointer !important;
+}

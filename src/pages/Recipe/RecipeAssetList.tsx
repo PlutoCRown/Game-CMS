@@ -44,8 +44,14 @@ const columns: ColumnsType<RRecipe> = [
 
 const RecipeAssetList: React.FC = () => {
   const rRecipe = useRRecipe();
-  console.log("表格你也刷啊？", rRecipe);
-  return <Table columns={columns} dataSource={rRecipe} />;
+  return (
+    <Table
+      columns={columns}
+      dataSource={rRecipe}
+      size="small"
+      rowKey={(i) => i.id}
+    />
+  );
 };
 
 export default React.memo(RecipeAssetList);

@@ -120,14 +120,14 @@ const RecipeEdit = () => {
           <Flex vertical gap={9}>
             <Flex vertical gap={8} style={selfAssetStyle}>
               <Input
-                placeholder="Search..."
+                placeholder="Select item..."
                 prefix={<SearchOutlined />}
               ></Input>
               <ItemGridLayout items={items} onItemClick={Pick} wrap />
             </Flex>
             <Flex vertical gap={8} style={selfAssetStyle}>
               <Input
-                placeholder="Search..."
+                placeholder="Use Machine..."
                 prefix={<SearchOutlined />}
               ></Input>
               <ItemGridLayout

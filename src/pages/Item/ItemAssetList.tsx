@@ -3,7 +3,8 @@ import { IItem, ItemQualityMapColor } from "@/types/Item";
 import { Table, Tag, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import ItemIcon from "../../components/Item/ItemIcon";
-import React, { useState } from "react";
+import React from "react";
+import styles from "./index.module.css";
 import { EditOutlined } from "@ant-design/icons";
 
 const ItemAssetList: React.FC<{
@@ -40,36 +41,31 @@ const ItemAssetList: React.FC<{
       ),
     },
     {
-      title: "Recipes Count",
+      title: "Recipes",
       key: "1",
       dataIndex: "id",
       render: (_, __) => "0",
     },
     {
-      title: "Ingendents Count",
+      title: "Ingendents",
       key: "2",
       dataIndex: "id",
       render: (_, __) => "0",
-    },
-    {
-      title: "Action",
-      key: "23",
-      dataIndex: "id",
-      render: (_, record) => (
-        <EditOutlined
-          style={{ cursor: "pointer" }}
-          onClick={() => onClick && onClick(record)}
-        />
-      ),
     },
   ];
 
   const items = useGlobalStore((state) => state.item);
   return (
     <Table
+      size="small"
       scroll={{ x: "100%" }}
+      className={styles.table}
       columns={columns}
-      dataSource={items.map((i) => ({ ...i, key: i.id }))}
+      onRow={(record) => ({
+        onClick: () => onClick && onClick(record),
+      })}
+      rowKey={(i) => i.id}
+      dataSource={items}
     />
   );
 };
