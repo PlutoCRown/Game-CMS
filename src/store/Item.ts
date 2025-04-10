@@ -85,7 +85,7 @@ export const ItemAssetAction = (
       }),
     updateItemAsset: (item: IItem) =>
       set((state) => {
-        const mod: IItem | any = state.item.find((i) => i.id === item.id)|| {}
+        const mod: IItem | any = state.item.find((i) => i.id === item.id) || {}
         Object.keys(mod)
           .filter((i) => i !== "id")
           .forEach((k) => {
